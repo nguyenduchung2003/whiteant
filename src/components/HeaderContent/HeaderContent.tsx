@@ -4,7 +4,11 @@ import slideshow_4 from "../../Image/slideshow_4.webp"
 import slideshow_5 from "../../Image/slideshow_5.webp"
 import slideshow_1 from "../../Image/slideshow_1.webp"
 import { Box, Typography, Button } from "@mui/material"
-import { useEffect, useMemo, useRef, useState } from "react"
+import {
+     // useEffect,
+     useMemo,
+     //   useRef, useState
+} from "react"
 // import gsap from "gsap"
 // import ScrollTrigger from "gsap/ScrollTrigger"
 interface Slideshow {
@@ -53,24 +57,6 @@ const HeaderContent = () => {
           ],
           []
      )
-     // const [x, setX] = useState(0)
-     // useEffect(() => {
-     //      gsap.registerPlugin(ScrollTrigger)
-     //      const tl = gsap.timeline()
-     //      ArrayPicture.forEach((_, index) => {
-     //           tl.from(`.x_${index}`, { yPercent: -100 })
-     //           // Add ScrollTrigger for each image
-     //           ScrollTrigger.create({
-     //                trigger: `.x_${index}`,
-     //                animation: tl,
-     //                start: "top top", // Change start to trigger when .x_0 is at the center
-     //                end: "bottom top",
-     //                scrub: true,
-     //                markers: true, // Add markers for visualization (you can remove this in production)
-     //                pinSpacing: true,
-     //           })
-     //      })
-     // }, [ArrayPicture])
 
      return (
           <>

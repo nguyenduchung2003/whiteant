@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from "@mui/material"
 interface Props {
-     title: string
+     title?: string
      arrayDataProduct: arrayNewProduct[]
 }
 const FrameListProduct = ({ title, arrayDataProduct }: Props) => {
