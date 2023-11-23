@@ -1,4 +1,5 @@
 import logo from "../../Image/logo.webp"
+
 import { Box, Typography } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined"
@@ -11,7 +12,9 @@ const SideBar = ({
      setOpenMenu?: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
      const ClickOpenMenu = () => {
-          setOpenMenu(true)
+          if (setOpenMenu) {
+               setOpenMenu(true)
+          }
      }
      return (
           <div>

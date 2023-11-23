@@ -27,6 +27,9 @@ import {
 } from "@mui/material"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
+import HeadSideBar from "../SideBar/HeadSideBar"
+import Menu from "../Menu"
+import FooterContent from "../Footer/FooterContent"
 // import { useSelector } from "react-redux"
 // import { RootState } from "../Store/store"
 import { ToastContainer, toast } from "react-toastify"
@@ -86,8 +89,23 @@ const Login = () => {
      // const access_token = useSelector(
      //      (state: RootState) => state.accountSlice.access_token as string
      // )
+     const [openMenu, setOpenMenu] = useState<boolean>(false)
+     const ClickOpenMenu = () => {
+          setOpenMenu(true)
+     }
+     
      return (
           <>
+          <HeadSideBar ClickOpenMenu={ClickOpenMenu} />
+               {openMenu ? (
+                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
+                         <Menu setOpenMenu={setOpenMenu} />
+                         
+                    </Box>
+               ) : (
+                    ""
+               )}
+               <hr />
                <Box className=" flex justify-center items-center mt-[150px]">
                     <ToastContainer />
                     <Formik
@@ -127,7 +145,7 @@ const Login = () => {
                                         )
                                    ) {
                                         toast.error(
-                                             "Tai khoan hoac mat khau khong chinh xac",
+                                             "Tài khoản hoặc mật khẩu không chính xác",
                                              {
                                                   position: "top-right",
                                                   autoClose: 3000,
@@ -146,7 +164,7 @@ const Login = () => {
                                    )
                               } else {
                                    toast.error(
-                                        "Tai khoan hoac mat khau khong chinh xac",
+                                        "Tài khoản hoặc mật khẩu không chính xác",
                                         {
                                              position: "top-right",
                                              autoClose: 3000,
@@ -165,14 +183,23 @@ const Login = () => {
                          }}
                     >
                          {(formikProps) => (
-                              <Form className="bg-[rgba(0,0,0,.75)] w-[500px] h-[80%] shadow-lg shadow-cyan-500/50 flex flex-col gap-[50px] justify-center items-center">
+                              <>
+                              <Box className=" flex w-1/2">
+                              <Typography
+                                        variant="h3"
+                                        className="font-bold text-black relative ml-[100px] p-[10px]"
+                                   >
+                                        ĐĂNG NHẬP
+                                   </Typography>
+                              </Box>
+                              <Form className=" w-1/3 h-[80%] flex flex-col gap-[50px] justify-center items-center">
                                    <Typography
                                         variant="h3"
                                         className="text-white relative "
                                    >
                                         Login
                                    </Typography>
-                                   <Box className=" w-[70%] h-[50px]">
+                                   <Box className=" w-[100%] h-[50px]">
                                         <TextField
                                              variant="outlined"
                                              label="Email"
@@ -184,7 +211,7 @@ const Login = () => {
                                                        : ""
                                              }
                                              name="email"
-                                             className="border-2 bg-[#333] rounded w-full"
+                                             className="border-2 bg-grey rounded w-full"
                                              onChange={formikProps.handleChange}
                                              onBlur={formikProps.handleBlur}
                                              error={
@@ -195,11 +222,11 @@ const Login = () => {
                                              }
                                              inputProps={{
                                                   style: {
-                                                       color: "white",
+                                                       color: "black",
                                                   },
                                              }}
                                              InputLabelProps={{
-                                                  style: { color: "white" },
+                                                  style: { color: "grey" },
                                              }}
                                              autoComplete="off"
                                         />
@@ -211,7 +238,7 @@ const Login = () => {
                                              )}
                                         </ErrorMessage>
                                    </Box>
-                                   <Box className=" w-[70%] h-[50px]">
+                                   <Box className=" w-[100%] h-[50px]">
                                         <TextField
                                              variant="outlined"
                                              label="Password"
@@ -226,7 +253,7 @@ const Login = () => {
                                                        : ""
                                              }
                                              name="password"
-                                             className="border-2 bg-[#333] rounded w-full"
+                                             className="border-2 bg-grey rounded w-full"
                                              onChange={formikProps.handleChange}
                                              onBlur={formikProps.handleBlur}
                                              error={
@@ -239,7 +266,7 @@ const Login = () => {
                                              }
                                              InputProps={{
                                                   style: {
-                                                       color: "white",
+                                                       color: "black",
                                                   },
                                                   endAdornment: (
                                                        <InputAdornment
@@ -259,7 +286,7 @@ const Login = () => {
                                                   ),
                                              }}
                                              InputLabelProps={{
-                                                  style: { color: "white" },
+                                                  style: { color: "grey" },
                                              }}
                                              autoComplete="off"
                                         />
@@ -275,12 +302,11 @@ const Login = () => {
                                    <Button
                                         type="submit"
                                         variant="contained"
-                                        className="rounded w-[70%]  h-[50px] "
-                                        color="error"
+                                        className="rounded w-[100%]  h-[50px] bg-black "
                                    >
                                         Login
                                    </Button>
-                                   <Typography className="text-white ">
+                                   <Typography className="text-black ">
                                         Tôi chưa có tài khoản
                                         <NavLink
                                              to="/register"
@@ -290,9 +316,11 @@ const Login = () => {
                                         </NavLink>
                                    </Typography>
                               </Form>
+                              </>
                          )}
                     </Formik>
                </Box>
+               <FooterContent />
           </>
      )
 }

@@ -5,6 +5,8 @@ import Iconcontact from "../components/IconContact"
 import Menu from "../components/Menu"
 import { Box } from "@mui/material"
 import { useState } from "react"
+import FooterContent from "../components/Footer/FooterContent"
+import HeaderFooter from "../components/HeaderFooter"
 function HomePage() {
      const [openMenu, setOpenMenu] = useState<boolean>(false)
      return (
@@ -12,7 +14,6 @@ function HomePage() {
                <SideBar setOpenMenu={setOpenMenu} />
                <Product />
                <Information />
-               <Iconcontact />
                {openMenu ? (
                     <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
                          <Menu setOpenMenu={setOpenMenu} />
@@ -20,6 +21,9 @@ function HomePage() {
                ) : (
                     ""
                )}
+               <HeaderFooter />
+               <FooterContent />
+               <Iconcontact />
           </>
      )
 }

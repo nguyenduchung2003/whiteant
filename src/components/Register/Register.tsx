@@ -1,3 +1,4 @@
+
 import {
      //  useEffect, useRef,
      useState,
@@ -15,7 +16,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 
 import { Formik, Form, ErrorMessage } from "formik"
 import { useSchemasRegister } from "../../Validate/Validate"
-
+import FooterContent from "../Footer/FooterContent"
 import {
      Button,
      TextField,
@@ -25,6 +26,8 @@ import {
 } from "@mui/material"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
+import HeadSideBar from "../SideBar/HeadSideBar"
+import Menu from "../Menu"
 // import { userType } from "../types/User"
 
 const Register = () => {
@@ -53,224 +56,246 @@ const Register = () => {
      // const actionTokenNew = useSelector(
      //      (state: RootState) => state.accountSlice.request_token as string
      // )
+     const [openMenu, setOpenMenu] = useState<boolean>(false)
+     const ClickOpenMenu = () => {
+          setOpenMenu(true)
+     }
      return (
+          <>
+           <HeadSideBar ClickOpenMenu={ClickOpenMenu} />
+               {openMenu ? (
+                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
+                         <Menu setOpenMenu={setOpenMenu} />
+                         
+                    </Box>
+               ) : (
+                    ""
+               )}
+               <hr />
           <Box className="flex justify-center items-center mt-[120px] ">
-               <Formik
-                    initialValues={initialValues}
-                    validationSchema={useSchemasRegister}
-                    onSubmit={async (values, actions) => {
-                         const newUser = {
-                              userName: values.email,
-                              passWord: values.password,
-                              list: [],
-                              status: false,
-                         }
-                         let usersFromLocalStorage: userType[] = []
-                         const storedData = localStorage.getItem("userss")
+          <Formik
+               initialValues={initialValues}
+               validationSchema={useSchemasRegister}
+               onSubmit={async (values, actions) => {
+                    const newUser = {
+                         userName: values.email,
+                         passWord: values.password,
+                         list: [],
+                         status: false,
+                    }
+                    let usersFromLocalStorage: userType[] = []
+                    const storedData = localStorage.getItem("userss")
 
-                         if (storedData !== null) {
-                              usersFromLocalStorage = JSON.parse(storedData)
-                         } else {
-                              console.log(1)
-                         }
+                    if (storedData !== null) {
+                         usersFromLocalStorage = JSON.parse(storedData)
+                    } else {
+                         console.log(1)
+                    }
 
-                         const updatedUsers = [
-                              ...usersFromLocalStorage,
-                              newUser,
-                         ]
-                         localStorage.setItem(
-                              "userss",
-                              JSON.stringify(updatedUsers)
-                         )
+                    const updatedUsers = [
+                         ...usersFromLocalStorage,
+                         newUser,
+                    ]
+                    localStorage.setItem(
+                         "userss",
+                         JSON.stringify(updatedUsers)
+                    )
 
-                         navigate("/login")
+                    navigate("/login")
 
-                         actions.setSubmitting(false)
-                    }}
-               >
-                    {(formikProps) => (
-                         <Form className="bg-[rgba(0,0,0,.75)] w-[500px] h-[80%] shadow-lg shadow-cyan-500/50 flex flex-col gap-[50px] justify-center items-center">
+                    actions.setSubmitting(false)
+               }}
+          >
+               {(formikProps) => (
+                    <>
+                      <Box className=" flex w-1/2">
                               <Typography
-                                   variant="h3"
-                                   className="text-white relative "
-                              >
-                                   Register
-                              </Typography>
-                              <Box className=" w-[70%] h-[50px]">
-                                   <TextField
-                                        variant="outlined"
-                                        label="Email"
-                                        value={
-                                             formikProps.values.email !==
-                                             undefined
-                                                  ? formikProps.values.email
-                                                  : ""
-                                        }
-                                        name="email"
-                                        className="border-2 bg-[#333] rounded w-full"
-                                        onChange={formikProps.handleChange}
-                                        onBlur={formikProps.handleBlur}
-                                        error={
-                                             formikProps.touched.email &&
-                                             Boolean(formikProps.errors.email)
-                                        }
-                                        inputProps={{
-                                             style: {
-                                                  color: "white",
-                                             },
-                                        }}
-                                        InputLabelProps={{
-                                             style: { color: "white" },
-                                        }}
-                                        autoComplete="off"
-                                   />
-                                   <ErrorMessage name="email">
-                                        {(msg) => (
-                                             <Typography className="text-lg text-red-600">
-                                                  {msg}
-                                             </Typography>
-                                        )}
-                                   </ErrorMessage>
-                              </Box>
-                              <Box className=" w-[70%] h-[50px]">
-                                   <TextField
-                                        variant="outlined"
-                                        label="Password"
-                                        type={checkEye ? "password" : "text"}
-                                        value={
-                                             formikProps.values.password !==
-                                             undefined
-                                                  ? formikProps.values.password
-                                                  : ""
-                                        }
-                                        name="password"
-                                        className="border-2 bg-[#333] rounded w-full"
-                                        onChange={formikProps.handleChange}
-                                        onBlur={formikProps.handleBlur}
-                                        error={
-                                             formikProps.touched.password &&
-                                             Boolean(
-                                                  formikProps.errors.password
-                                             )
-                                        }
-                                        InputProps={{
-                                             style: {
-                                                  color: "white",
-                                             },
-                                             endAdornment: (
-                                                  <InputAdornment
-                                                       position="start"
-                                                       onClick={() => {
-                                                            setCheckEye(
-                                                                 !checkEye
-                                                            )
-                                                       }}
-                                                  >
-                                                       {checkEye ? (
-                                                            <VisibilityIcon />
-                                                       ) : (
-                                                            <VisibilityOffIcon />
-                                                       )}
-                                                  </InputAdornment>
-                                             ),
-                                        }}
-                                        InputLabelProps={{
-                                             style: { color: "white" },
-                                        }}
-                                        autoComplete="off"
-                                   />
-                                   <ErrorMessage name="password">
-                                        {(msg) => (
-                                             <Typography className="text-lg text-red-600">
-                                                  {msg}
-                                             </Typography>
-                                        )}
-                                   </ErrorMessage>
-                              </Box>
-                              <Box className=" w-[70%] h-[50px]">
-                                   <TextField
-                                        variant="outlined"
-                                        label="Password confirm"
-                                        type={
-                                             checkEyeConfirm
-                                                  ? "password"
-                                                  : "text"
-                                        }
-                                        value={
-                                             formikProps.values
-                                                  .passwordConfirm !== undefined
-                                                  ? formikProps.values
-                                                         .passwordConfirm
-                                                  : ""
-                                        }
-                                        name="passwordConfirm"
-                                        className="border-2 bg-[#333] rounded w-full"
-                                        onChange={formikProps.handleChange}
-                                        onBlur={formikProps.handleBlur}
-                                        error={
-                                             formikProps.touched
-                                                  .passwordConfirm &&
-                                             Boolean(
-                                                  formikProps.errors
-                                                       .passwordConfirm
-                                             )
-                                        }
-                                        InputProps={{
-                                             style: {
-                                                  color: "white",
-                                             },
-                                             endAdornment: (
-                                                  <InputAdornment
-                                                       position="start"
-                                                       onClick={() => {
-                                                            setCheckEyeConfirm(
-                                                                 !checkEyeConfirm
-                                                            )
-                                                       }}
-                                                  >
-                                                       {checkEyeConfirm ? (
-                                                            <VisibilityIcon />
-                                                       ) : (
-                                                            <VisibilityOffIcon />
-                                                       )}
-                                                  </InputAdornment>
-                                             ),
-                                        }}
-                                        InputLabelProps={{
-                                             style: { color: "white" },
-                                        }}
-                                        autoComplete="off"
-                                   />
-                                   <ErrorMessage name="passwordConfirm">
-                                        {(msg) => (
-                                             <Typography className="text-lg text-red-600">
-                                                  {msg}
-                                             </Typography>
-                                        )}
-                                   </ErrorMessage>
-                              </Box>
-
-                              <Button
-                                   type="submit"
-                                   variant="contained"
-                                   className="rounded w-[70%]  h-[50px] "
-                                   color="error"
-                              >
-                                   Register
-                              </Button>
-                              <Typography className="text-white ">
-                                   Tôi đã có tài khoản
-                                   <NavLink
-                                        to="/login"
-                                        className="text-red-600 relative left-5"
+                                        variant="h3"
+                                        className="font-bold text-black relative ml-[100px] p-[10px]"
                                    >
-                                        Đăng nhập
-                                   </NavLink>
-                              </Typography>
-                         </Form>
-                    )}
-               </Formik>
-          </Box>
+                                        ĐĂNG KÍ
+                                   </Typography>
+                              </Box>
+                    <Form className="w-1/3 h-[80%] flex flex-col gap-[50px] justify-center items-center">
+                         <Box className=" w-[100%] h-[50px]">
+                              <TextField
+                                   variant="outlined"
+                                   label="Email"
+                                   value={
+                                        formikProps.values.email !==
+                                        undefined
+                                             ? formikProps.values.email
+                                             : ""
+                                   }
+                                   name="email"
+                                   className="border-2 bg-[white] rounded w-full"
+                                   onChange={formikProps.handleChange}
+                                   onBlur={formikProps.handleBlur}
+                                   error={
+                                        formikProps.touched.email &&
+                                        Boolean(formikProps.errors.email)
+                                   }
+                                   inputProps={{
+                                        style: {
+                                             color: "black",
+                                        },
+                                   }}
+                                   InputLabelProps={{
+                                        style: { color: "grey" },
+                                   }}
+                                   autoComplete="off"
+                              />
+                              <ErrorMessage name="email">
+                                   {(msg) => (
+                                        <Typography className="text-lg text-red-600">
+                                             {msg}
+                                        </Typography>
+                                   )}
+                              </ErrorMessage>
+                         </Box>
+                         <Box className=" w-[100%] h-[50px]">
+                              <TextField
+                                   variant="outlined"
+                                   label="Password"
+                                   type={checkEye ? "password" : "text"}
+                                   value={
+                                        formikProps.values.password !==
+                                        undefined
+                                             ? formikProps.values.password
+                                             : ""
+                                   }
+                                   name="password"
+                                   className="border-2 bg- rounded w-full"
+                                   onChange={formikProps.handleChange}
+                                   onBlur={formikProps.handleBlur}
+                                   error={
+                                        formikProps.touched.password &&
+                                        Boolean(
+                                             formikProps.errors.password
+                                        )
+                                   }
+                                   InputProps={{
+                                        style: {
+                                             color: "black",
+                                        },
+                                        endAdornment: (
+                                             <InputAdornment
+                                                  position="start"
+                                                  onClick={() => {
+                                                       setCheckEye(
+                                                            !checkEye
+                                                       )
+                                                  }}
+                                             >
+                                                  {checkEye ? (
+                                                       <VisibilityIcon />
+                                                  ) : (
+                                                       <VisibilityOffIcon />
+                                                  )}
+                                             </InputAdornment>
+                                        ),
+                                   }}
+                                   InputLabelProps={{
+                                        style: { color: "grey" },
+                                   }}
+                                   autoComplete="off"
+                              />
+                              <ErrorMessage name="password">
+                                   {(msg) => (
+                                        <Typography className="text-lg text-red-600">
+                                             {msg}
+                                        </Typography>
+                                   )}
+                              </ErrorMessage>
+                         </Box>
+                         <Box className=" w-[100%] h-[50px]">
+                              <TextField
+                                   variant="outlined"
+                                   label="Password confirm"
+                                   type={
+                                        checkEyeConfirm
+                                             ? "password"
+                                             : "text"
+                                   }
+                                   value={
+                                        formikProps.values
+                                             .passwordConfirm !== undefined
+                                             ? formikProps.values
+                                                    .passwordConfirm
+                                             : ""
+                                   }
+                                   name="passwordConfirm"
+                                   className="border-2 bg-grey rounded w-full"
+                                   onChange={formikProps.handleChange}
+                                   onBlur={formikProps.handleBlur}
+                                   error={
+                                        formikProps.touched
+                                             .passwordConfirm &&
+                                        Boolean(
+                                             formikProps.errors
+                                                  .passwordConfirm
+                                        )
+                                   }
+                                   InputProps={{
+                                        style: {
+                                             color: "black",
+                                        },
+                                        endAdornment: (
+                                             <InputAdornment
+                                                  position="start"
+                                                  onClick={() => {
+                                                       setCheckEyeConfirm(
+                                                            !checkEyeConfirm
+                                                       )
+                                                  }}
+                                             >
+                                                  {checkEyeConfirm ? (
+                                                       <VisibilityIcon />
+                                                  ) : (
+                                                       <VisibilityOffIcon />
+                                                  )}
+                                             </InputAdornment>
+                                        ),
+                                   }}
+                                   InputLabelProps={{
+                                        style: { color: "grey" },
+                                   }}
+                                   autoComplete="off"
+                              />
+                              <ErrorMessage name="passwordConfirm">
+                                   {(msg) => (
+                                        <Typography className="text-lg text-red-600">
+                                             {msg}
+                                        </Typography>
+                                   )}
+                              </ErrorMessage>
+                         </Box>
+
+                         <Button
+                              type="submit"
+                              variant="contained"
+                              className="rounded 10  h-[50px] w-[100%] bg-black text-white hover-white"
+                         >
+                              Register
+                         </Button>
+                         <Typography className="text-grey ">
+                              Tôi đã có tài khoản
+                              <NavLink
+                                   to="/login"
+                                   className="text-red-600 relative left-5"
+                              >
+                                   Đăng nhập
+                              </NavLink>
+                         </Typography>
+                    </Form>
+                    </>
+               )}
+          </Formik>
+     </Box>
+     <FooterContent />
+     </>
+          
+          
      )
 }
 export default Register

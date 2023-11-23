@@ -5,7 +5,7 @@ import dataProduct from "./dataProduct"
 
 import { useState } from "react"
 import DialogList from "./DialogList"
-
+import Menu from "../Menu"
 const Order = () => {
      const [updateList, setUpdateList] = useState<boolean>(false)
      const [open, setOpen] = useState(false)
@@ -77,10 +77,22 @@ const Order = () => {
           setUpdateList(false)
           setOpen(false)
      }
-
+     const [openMenu, setOpenMenu] = useState<boolean>(false)
+     const ClickOpenMenu = () => {
+          setOpenMenu(true)
+     }
+     
      return (
           <>
-               <HeadSideBar />
+               <HeadSideBar ClickOpenMenu={ClickOpenMenu} />
+               {openMenu ? (
+                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
+                         <Menu setOpenMenu={setOpenMenu} />
+                         
+                    </Box>
+               ) : (
+                    ""
+               )}
                <hr />
                <img
                     src={`${allProduct}`}
@@ -104,6 +116,10 @@ const Order = () => {
 
                <Box className="flex gap-5 justify-center">
                     {data.map((product, index) => {
+                          const formattedPrice = Number(product.price).toLocaleString('vi-VN', {
+                              style: 'currency',
+                              currency: 'VND'
+                         });
                          return (
                               <Box
                                    key={index}
@@ -119,11 +135,11 @@ const Order = () => {
                                    </Typography>
                                    <Box className="w-[340px] flex flex-col gap-3">
                                         <Typography className="truncate">
-                                             {product.name}
+                                        Tên sản phẩm:     {product.name}
                                         </Typography>
                                         <Box>
-                                             <Typography className="text-center">
-                                                  {product.price}
+                                             <Typography className="">
+                                             Giá sản phẩm:     {formattedPrice}
                                              </Typography>
                                              <Button
                                                   onClick={() =>

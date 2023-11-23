@@ -150,14 +150,14 @@ const Menu = ({
                          </Collapse>
                          <ListItemButton>
                               <ListItemText
-                                   primary="Đơn hàng"
+                                   primary="QUẢN LÝ SẢN PHẨM"
                                    onClick={() => {
                                         navigate("/order")
                                    }}
                               />
                          </ListItemButton>
                          <ListItemButton>
-                              {storedData.some(
+                              {storedData?.some(
                                    (item) => item.status == true
                               ) ? (
                                    <ListItemText
