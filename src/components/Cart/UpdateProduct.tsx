@@ -6,7 +6,7 @@ import dataProduct from "./dataProduct"
 import { useState } from "react"
 import DialogList from "./DialogList"
 import Menu from "../Menu"
-const Order = () => {
+const UpdateProduct = () => {
      const [updateList, setUpdateList] = useState<boolean>(false)
      const [open, setOpen] = useState(false)
      const [listName, setListName] = useState("")
@@ -171,4 +171,4 @@ const Order = () => {
           </>
      )
 }
-export default Order
+export default UpdateProduct

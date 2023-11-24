@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 import App from "../App"
 import Register from "../components/Register"
 import Login from "../components/Login"
-import Order from "../components/Cart/Order"
+import Order from "../components/Cart/UpdateProduct"
 const router = createBrowserRouter([
      {
           path: "/",
