@@ -6,7 +6,13 @@ import dataProduct from "./dataProduct"
 import { useState } from "react"
 import DialogList from "./DialogList"
 import Menu from "../Menu"
+import { useAppSelector, useAppDispatch } from "../../hook"
+import { addItem } from "../../Slice/Order"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 const UpdateProduct = () => {
+     const selectOrder = useAppSelector((state) => state.order)
+     const dispatch = useAppDispatch()
      const [updateList, setUpdateList] = useState<boolean>(false)
      const [open, setOpen] = useState(false)
      const [listName, setListName] = useState("")
@@ -81,14 +87,40 @@ const UpdateProduct = () => {
      const ClickOpenMenu = () => {
           setOpenMenu(true)
      }
-     
+
+     const handlerAddItemOrder = async (
+          id: number,
+          path: string,
+          name: string,
+          price: string
+     ) => {
+          const newItem: arrayOrderProduct = {
+               id: id,
+               pathImg: path,
+               name: name,
+               price: price,
+               quantity: 1,
+          }
+          await dispatch(addItem(newItem))
+          toast.success("Them item thanh cong", {
+               position: "top-right",
+               autoClose: 3000,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: true,
+               draggable: true,
+               progress: undefined,
+               theme: "light",
+          })
+     }
+
      return (
           <>
+               <ToastContainer />
                <HeadSideBar ClickOpenMenu={ClickOpenMenu} />
                {openMenu ? (
                     <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
                          <Menu setOpenMenu={setOpenMenu} />
-                         
                     </Box>
                ) : (
                     ""
@@ -116,10 +148,12 @@ const UpdateProduct = () => {
 
                <Box className="flex gap-5 justify-center">
                     {data.map((product, index) => {
-                          const formattedPrice = Number(product.price).toLocaleString('vi-VN', {
-                              style: 'currency',
-                              currency: 'VND'
-                         });
+                         const formattedPrice = Number(
+                              product.price
+                         ).toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                         })
                          return (
                               <Box
                                    key={index}
@@ -130,16 +164,26 @@ const UpdateProduct = () => {
                                         alt=""
                                         className="w-[348px] h-[522px] "
                                    />
-                                   <Typography className="absolute invisible  top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center  group-hover/item:visible">
+                                   <Typography
+                                        onClick={() =>
+                                             handlerAddItemOrder(
+                                                  product.id as number,
+                                                  product.pathImg,
+                                                  product.name,
+                                                  product.price
+                                             )
+                                        }
+                                        className="absolute invisible  top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center  group-hover/item:visible"
+                                   >
                                         MUA NGAY &rarr;
                                    </Typography>
                                    <Box className="w-[340px] flex flex-col gap-3">
                                         <Typography className="truncate">
-                                        Tên sản phẩm:     {product.name}
+                                             Tên sản phẩm: {product.name}
                                         </Typography>
                                         <Box>
                                              <Typography className="">
-                                             Giá sản phẩm:     {formattedPrice}
+                                                  Giá sản phẩm: {formattedPrice}
                                              </Typography>
                                              <Button
                                                   onClick={() =>
