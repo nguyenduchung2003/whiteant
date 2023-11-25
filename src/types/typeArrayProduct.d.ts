@@ -18,8 +18,10 @@ declare global {
           name: string
           price: string
           quantity: number
+          emailNow?: string
      }
      interface arrayMyOrder {
+          emailNow?: string
           name?: string
           email?: string
           numberPhone?: string
