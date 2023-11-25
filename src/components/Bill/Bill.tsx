@@ -9,9 +9,26 @@ import { Button } from "@mui/material"
 import { useAppSelector } from "../../hook"
 import { useNavigate } from "react-router-dom"
 const Bill = () => {
-     const selectOrder = useAppSelector((state) => state.order.arrayMyOrder)
      const navigate = useNavigate()
-
+     const dataLocal: userType[] = JSON.parse(
+          localStorage.getItem("userss") as string
+     )
+     const x = dataLocal.filter((user) => user.status == true)
+     const userNow = Object.assign({}, x)[0]
+     // const selectOrder = useAppSelector((state) => {
+     //      return state.order.arrayMyOrder.filter(
+     //           (order) => order.emailNow == userNow.userName
+     //      )
+     // })
+     const selectOrder = useAppSelector((state) => {
+          if (userNow) {
+               return state.order.arrayMyOrder.filter(
+                    (order) => order.emailNow === userNow.userName
+               )
+          }
+          return []
+     })
+     console.log(selectOrder)
      return (
           <>
                <Button variant="contained" onClick={() => navigate("/order")}>
@@ -52,7 +69,7 @@ const Bill = () => {
                               </TableRow>
                          </TableHead>
                          <TableBody>
-                              {selectOrder.map((row, index) => (
+                              {selectOrder?.map((row, index) => (
                                    <TableRow
                                         key={index}
                                         sx={{
@@ -82,7 +99,13 @@ const Bill = () => {
                                              {row.nameWard}
                                         </TableCell>
                                         <TableCell align="right">
-                                             {row?.arrayOder.length}
+                                             {
+                                                  row?.arrayOder?.filter(
+                                                       (item) =>
+                                                            item.emailNow ==
+                                                            userNow.userName
+                                                  ).length
+                                             }
                                         </TableCell>
                                         <TableCell align="right">
                                              {row.valuePayment}

@@ -42,12 +42,28 @@ const CheckOut = () => {
      ) => {
           setValuePayment((event.target as HTMLInputElement).value)
      }
-     const totalAmount = selectOrder.reduce(
-          (total, product) =>
-               total + product.quantity * (product.price as unknown as number),
-          0
+     const userLocal: userType[] = JSON.parse(
+          localStorage.getItem("userss") as string
      )
+     const x = userLocal.filter((user) => user.status == true)
+     const userNow = Object.assign({}, x)[0]
+     const totalAmount = selectOrder
+          .filter((item) => item.emailNow == userNow.userName)
+          .reduce(
+               (total, product) =>
+                    total +
+                    product.quantity * (product.price as unknown as number),
+               0
+          )
 
+     useEffect(() => {
+          if (userLocal.some((user) => user.status == true)) {
+               const x = userLocal.filter((user) => user.status == true)
+               const user = Object.assign({}, x)[0]
+               console.log(user)
+               setEmail(user.userName)
+          }
+     }, [userLocal])
      const CompleteOrder = async () => {
           if (
                !name ||
@@ -82,6 +98,9 @@ const CheckOut = () => {
                     theme: "light",
                })
           } else {
+               const x = userLocal.filter((user) => user.status == true)
+               const user = Object.assign({}, x)[0]
+
                const newOrder = {
                     name: name,
                     email: email,
@@ -94,6 +113,7 @@ const CheckOut = () => {
                     nameWard: nameWard,
                     arrayOder: selectOrder,
                     totalAmount: totalAmount,
+                    emailNow: user.userName,
                }
                toast.success("Dat hang thanh cong", {
                     position: "top-right",
@@ -110,17 +130,7 @@ const CheckOut = () => {
                console.log(newOrder)
           }
      }
-     const userLocal: userType[] = JSON.parse(
-          localStorage.getItem("userss") as string
-     )
-     useEffect(() => {
-          if (userLocal.some((user) => user.status == true)) {
-               const x = userLocal.filter((user) => user.status == true)
-               const user = Object.assign({}, x)[0]
-               console.log(user)
-               setEmail(user.userName)
-          }
-     }, [userLocal])
+
      return (
           <>
                <ToastContainer />
@@ -240,47 +250,49 @@ const CheckOut = () => {
                     </Box>
                     <Box className="w-[50%] mt-[50px]">
                          <Box className="flex flex-col gap-5 ml-5">
-                              {selectOrder.map((product, index) => {
-                                   return (
-                                        <Box
-                                             key={index}
-                                             className="flex gap-5 group/item relative"
-                                        >
-                                             <img
-                                                  src={`${product.pathImg}`}
-                                                  alt=""
-                                                  className="w-[70px] h-[103px]"
-                                             />
-                                             <Box className="w-[250px] flex flex-col gap-3">
-                                                  <Typography className="text-ellipsis text-sm">
-                                                       {product.name}
-                                                  </Typography>
-                                                  <Typography>
-                                                       {new Intl.NumberFormat(
-                                                            "vi-VN",
-                                                            {
-                                                                 style: "currency",
-                                                                 currency:
-                                                                      "VND",
-                                                            }
-                                                       ).format(
-                                                            product.price as unknown as number
-                                                       )}
-                                                  </Typography>
-                                                  <Box className="flex">
-                                                       <Input
-                                                            type="text"
-                                                            className="w-[20px] h-[20px] justify-center text-center content-center mr-3 flex items-center"
-                                                            value={
-                                                                 product.quantity
-                                                            }
-                                                            readOnly
-                                                       />
+                              {selectOrder
+                                   .filter((item) => item.emailNow == email)
+                                   .map((product, index) => {
+                                        return (
+                                             <Box
+                                                  key={index}
+                                                  className="flex gap-5 group/item relative"
+                                             >
+                                                  <img
+                                                       src={`${product.pathImg}`}
+                                                       alt=""
+                                                       className="w-[70px] h-[103px]"
+                                                  />
+                                                  <Box className="w-[250px] flex flex-col gap-3">
+                                                       <Typography className="text-ellipsis text-sm">
+                                                            {product.name}
+                                                       </Typography>
+                                                       <Typography>
+                                                            {new Intl.NumberFormat(
+                                                                 "vi-VN",
+                                                                 {
+                                                                      style: "currency",
+                                                                      currency:
+                                                                           "VND",
+                                                                 }
+                                                            ).format(
+                                                                 product.price as unknown as number
+                                                            )}
+                                                       </Typography>
+                                                       <Box className="flex">
+                                                            <Input
+                                                                 type="text"
+                                                                 className="w-[20px] h-[20px] justify-center text-center content-center mr-3 flex items-center"
+                                                                 value={
+                                                                      product.quantity
+                                                                 }
+                                                                 readOnly
+                                                            />
+                                                       </Box>
                                                   </Box>
                                              </Box>
-                                        </Box>
-                                   )
-                              })}
+                                        )
+                                   })}
                          </Box>
                          <hr className="mt-[20px]" />
                          <Typography>Tong tien : {`${totalAmount}`}</Typography>
