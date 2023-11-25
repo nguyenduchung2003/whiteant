@@ -18,6 +18,7 @@ import { useAppSelector, useAppDispatch } from "../../hook"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { completeMyOrder } from "../../Slice/Order"
+import  logo  from "../../Image/logo.png"
 const CheckOut = () => {
      const selectOrder = useAppSelector(
           (state) => state.order.arrayOrderProduct
@@ -121,16 +122,23 @@ const CheckOut = () => {
                setEmail(user.userName)
           }
      }, [userLocal])
+     const formattedPrice = Number(
+          totalAmount
+     ).toLocaleString("vi-VN", {
+          style: "currency",
+          currency: "VND",
+     })
      return (
+          
           <>
                <ToastContainer />
-               <Box className="flex">
+               <Box className="flex ml-10 h-[1000px]">
                     <Box className="w-[50%]">
-                         <Button onClick={() => navigate("/")}>Logo</Button>
-                         <Box className="flex flex-col gap-10  ">
+                         <Button onClick={() => navigate("/")}> <img className="w-[100px]" src={logo} alt="" /> </Button>
+                         <Box className="flex flex-col gap-10 w-[60%] ml-[300px] ">
                               <Box className="flex flex-col gap-2">
-                                   <Typography variant="h5">
-                                        Thong tin giao hang
+                                   <Typography variant="h5" className="mt-5">
+                                       Thông tin giao hàng
                                    </Typography>
                                    <Box className="flex">
                                         {userLocal.some(
@@ -157,7 +165,7 @@ const CheckOut = () => {
 
                               <Box className="flex flex-col  gap-5">
                                    <TextField
-                                        label="Ho va ten"
+                                        label="Họ và tên"
                                         value={name}
                                         onChange={(e) =>
                                              setName(e.target.value)
@@ -171,14 +179,14 @@ const CheckOut = () => {
                                         }
                                    ></TextField>
                                    <TextField
-                                        label="So dien thoai"
+                                        label="Số điện thoại"
                                         value={numberPhone}
                                         onChange={(e) =>
                                              setNumberPhone(e.target.value)
                                         }
                                    ></TextField>
                                    <TextField
-                                        label="Dia chi"
+                                        label="Địa chỉ"
                                         value={address}
                                         onChange={(e) =>
                                              setAddress(e.target.value)
@@ -192,7 +200,7 @@ const CheckOut = () => {
                               />
 
                               <FormControl>
-                                   <FormLabel>Phuong thuc van chuyen</FormLabel>
+                                   <FormLabel>Phương thức vận chuyển</FormLabel>
                                    <RadioGroup
                                         name="vanchuyen"
                                         value={valueShip}
@@ -201,17 +209,17 @@ const CheckOut = () => {
                                         <FormControlLabel
                                              value="ghtk"
                                              control={<Radio />}
-                                             label="GHTK"
+                                             label="Giao hàng tận nơi, Freeship với đơn hàng trên 1.000.000"
                                         />
                                         <FormControlLabel
                                              value="denshop"
                                              control={<Radio />}
-                                             label="Den shop"
+                                             label="Đến trực tiếp cửa hàng"
                                         />
                                    </RadioGroup>
                               </FormControl>
                               <FormControl>
-                                   <FormLabel>Phuong thuc thanh toan</FormLabel>
+                                   <FormLabel>Phương thức thanh toán</FormLabel>
                                    <RadioGroup
                                         name="thanhtoan"
                                         value={valuePayment}
@@ -220,26 +228,27 @@ const CheckOut = () => {
                                         <FormControlLabel
                                              value="tienmat"
                                              control={<Radio />}
-                                             label="tien mat"
+                                             label="Thanh toán khi giao hàng (COD)"
                                         />
                                         <FormControlLabel
                                              value="chuyenkhoan"
                                              control={<Radio />}
-                                             label="chuyen khoan"
+                                             label="Chuyển khoản qua ngân hàng"
                                         />
                                    </RadioGroup>
                               </FormControl>
 
                               <Button
-                                   variant="outlined"
+                                   variant="contained"
                                    onClick={CompleteOrder}
+                                   className="bg-black"
                               >
-                                   Hoan tat don hang
+                                  Hoàn tất đơn hàng
                               </Button>
                          </Box>
                     </Box>
-                    <Box className="w-[50%] mt-[50px]">
-                         <Box className="flex flex-col gap-5 ml-5">
+                    <Box className="w-[50%] ml-10 border-l-[1px] pt-[70px] bg-[#f5f5f5]">
+                         <Box className="flex flex-col gap-5 ml-10">
                               {selectOrder.map((product, index) => {
                                    return (
                                         <Box
@@ -268,22 +277,18 @@ const CheckOut = () => {
                                                        )}
                                                   </Typography>
                                                   <Box className="flex">
-                                                       <Input
-                                                            type="text"
-                                                            className="w-[20px] h-[20px] justify-center text-center content-center mr-3 flex items-center"
-                                                            value={
-                                                                 product.quantity
-                                                            }
-                                                            readOnly
-                                                       />
+                                                       <Typography className="text-sm">SL:{ product.quantity}</Typography>
                                                   </Box>
                                              </Box>
                                         </Box>
                                    )
                               })}
                          </Box>
-                         <hr className="mt-[20px]" />
-                         <Typography>Tong tien : {`${totalAmount}`}</Typography>
+                         <hr className="mt-[20px] w-[38%] ml-10" />
+                         <Typography className="mt-[20px] ml-10">Tạm tính: {`${formattedPrice}`}</Typography>
+                         <Typography className="mt-[20px] ml-10">Phí vận chuyển: Free</Typography>
+                         <hr className="mt-[20px] w-[38%] ml-10" />
+                         <Typography className="mt-[20px] ml-10">Tổng cộng: {`${formattedPrice}`}</Typography>
                     </Box>
                </Box>
           </>

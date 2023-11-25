@@ -99,14 +99,14 @@ const SelectProvinces = ({
      return (
           <Box className="flex gap-4">
                <FormControl fullWidth>
-                    <InputLabel>setDataProvince</InputLabel>
+                    <InputLabel>Tỉnh/thành</InputLabel>
                     <Select
                          value={valueProvince}
                          label="setDataProvince"
                          onChange={handleChangeProvince}
                     >
                          <MenuItem value={0} key={0}>
-                              Chon tinh thanh pho
+                              Chọn tỉnh / thành phố
                          </MenuItem>
                          {dataProvince?.map((item, index) => {
                               return (
@@ -118,7 +118,7 @@ const SelectProvinces = ({
                     </Select>
                </FormControl>
                <FormControl fullWidth>
-                    <InputLabel>setDataDistrict</InputLabel>
+                    <InputLabel>Quận/huyện</InputLabel>
 
                     <Select
                          value={valueDistrict}
@@ -126,7 +126,7 @@ const SelectProvinces = ({
                          onChange={handleChangeDistrict}
                     >
                          <MenuItem value={0} key={0}>
-                              Chon tinh quan huyen
+                              Chọn quận / huyện
                          </MenuItem>
                          {dataDistrict?.map((item, index) => {
                               return (
@@ -138,7 +138,7 @@ const SelectProvinces = ({
                     </Select>
                </FormControl>
                <FormControl fullWidth>
-                    <InputLabel>setDataWard</InputLabel>
+                    <InputLabel>Phường/xã</InputLabel>
 
                     <Select
                          value={valueWard}
@@ -146,7 +146,7 @@ const SelectProvinces = ({
                          onChange={handleChangeWard}
                     >
                          <MenuItem value={0} key={0}>
-                              Chon tinh xa
+                             Chọn phường / xã
                          </MenuItem>
                          {dataWard?.map((item, index) => {
                               return (

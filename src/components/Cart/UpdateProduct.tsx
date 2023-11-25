@@ -161,7 +161,7 @@ const UpdateProduct = () => {
                     alt=""
                     className="h-[650px] w-full object-cover"
                />
-               {dataLocal.some(
+               {dataLocal?.some(
                     (data: userType) =>
                          data.userName == "admin@gmail.com" &&
                          data.status == true
@@ -257,7 +257,7 @@ const UpdateProduct = () => {
                                                        Giá sản phẩm:{" "}
                                                        {formattedPrice}
                                                   </Typography>
-                                                  {dataLocal.some(
+                                                  {dataLocal?.some(
                                                        (data: userType) =>
                                                             data.userName ==
                                                                  "admin@gmail.com" &&

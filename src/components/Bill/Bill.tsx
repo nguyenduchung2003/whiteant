@@ -17,7 +17,7 @@ const Bill = () => {
                <Button variant="contained" onClick={() => navigate("/order")}>
                     Quay lai
                </Button>
-               <TableContainer component={Paper}>
+               <TableContainer component={Paper}>z
                     <Table
                          sx={{ minWidth: 650 }}
                          size="small"
@@ -57,9 +57,9 @@ const Bill = () => {
                                         key={index}
                                         sx={{
                                              "&:last-child td, &:last-child th":
-                                                  {
-                                                       border: 0,
-                                                  },
+                                             {
+                                                  border: 0,
+                                             },
                                         }}
                                    >
                                         <TableCell align="right">
@@ -82,7 +82,7 @@ const Bill = () => {
                                              {row.nameWard}
                                         </TableCell>
                                         <TableCell align="right">
-                                             {row?.arrayOder.length}
+                                             {row.arrayOder ? row.arrayOder.length : 0}
                                         </TableCell>
                                         <TableCell align="right">
                                              {row.valuePayment}

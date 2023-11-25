@@ -11,5 +11,53 @@ const dataProduct: arrayNewProduct[] = [
           name: "Chân Váy Bút Chì Dáng Dài Xếp Ly Nữ EUNICE PENCIL SKIRT 110100080.001",
           price: "1185000",
      },
+     {
+          id: 3,
+          pathImg: "https://product.hstatic.net/1000210298/product/nqb06740-1__custom__e2a299f835cd45aebf8f45817b27e04d_master.jpg",
+          name: "Đầm Suông Trễ Vai Nữ LYNNE OFF THE SHOULDER DRESS 120900001",
+          price: "2985000",
+     },
+     {
+          id: 4,
+          pathImg: "https://product.hstatic.net/1000210298/product/nqb06740-1__custom__e2a299f835cd45aebf8f45817b27e04d_master.jpg",
+          name: "Đầm Suông Trễ Vai Nữ LYNNE OFF THE SHOULDER DRESS 120900001",
+          price: "2985000",
+     },
+     {
+          id: 5,
+          pathImg: "https://product.hstatic.net/1000210298/product/nqb06740-1__custom__e2a299f835cd45aebf8f45817b27e04d_master.jpg",
+          name: "Đầm Suông Trễ Vai Nữ LYNNE OFF THE SHOULDER DRESS 120900001",
+          price: "2985000",
+     },
+     {
+          id: 6,
+          pathImg: "https://product.hstatic.net/1000210298/product/nqb06740-1__custom__e2a299f835cd45aebf8f45817b27e04d_master.jpg",
+          name: "Đầm Suông Trễ Vai Nữ LYNNE OFF THE SHOULDER DRESS 120900001",
+          price: "2985000",
+     },
+     {
+          id: 7,
+          pathImg: "https://product.hstatic.net/1000210298/product/nqb06740-1__custom__e2a299f835cd45aebf8f45817b27e04d_master.jpg",
+          name: "Đầm Suông Trễ Vai Nữ LYNNE OFF THE SHOULDER DRESS 120900001",
+          price: "2985000",
+     },
+     {
+          id: 8,
+          pathImg: "https://product.hstatic.net/1000210298/product/nqb06740-1__custom__e2a299f835cd45aebf8f45817b27e04d_master.jpg",
+          name: "Đầm Suông Trễ Vai Nữ LYNNE OFF THE SHOULDER DRESS 120900001",
+          price: "2985000",
+     },
+     {
+          id: 9,
+          pathImg: "https://product.hstatic.net/1000210298/product/nqb06740-1__custom__e2a299f835cd45aebf8f45817b27e04d_master.jpg",
+          name: "Đầm Suông Trễ Vai Nữ LYNNE OFF THE SHOULDER DRESS 120900001",
+          price: "2985000",
+     },
+     {
+          id: 10,
+          pathImg: "https://product.hstatic.net/1000210298/product/nqb06740-1__custom__e2a299f835cd45aebf8f45817b27e04d_master.jpg",
+          name: "Đầm Suông Trễ Vai Nữ LYNNE OFF THE SHOULDER DRESS 120900001",
+          price: "2985000",
+     },
 ]
 export default dataProduct
