@@ -13,7 +13,7 @@ import {
 } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import SelectProvinces from "./SelectProvinces"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppSelector, useAppDispatch } from "../../hook"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -110,6 +110,17 @@ const CheckOut = () => {
                console.log(newOrder)
           }
      }
+     const userLocal: userType[] = JSON.parse(
+          localStorage.getItem("userss") as string
+     )
+     useEffect(() => {
+          if (userLocal.some((user) => user.status == true)) {
+               const x = userLocal.filter((user) => user.status == true)
+               const user = Object.assign({}, x)[0]
+               console.log(user)
+               setEmail(user.userName)
+          }
+     }, [userLocal])
      return (
           <>
                <ToastContainer />
@@ -122,15 +133,25 @@ const CheckOut = () => {
                                         Thong tin giao hang
                                    </Typography>
                                    <Box className="flex">
-                                        <Typography>
-                                             Ban da co tai khoan ?{" "}
-                                        </Typography>
-                                        <Typography
-                                             onClick={() => navigate("/login")}
-                                             className="text-cyan-500 cursor-pointer"
-                                        >
-                                             Dang nhap
-                                        </Typography>
+                                        {userLocal.some(
+                                             (user) => user.status == true
+                                        ) ? (
+                                             ""
+                                        ) : (
+                                             <>
+                                                  <Typography>
+                                                       Ban da co tai khoan ?
+                                                  </Typography>
+                                                  <Typography
+                                                       onClick={() =>
+                                                            navigate("/login")
+                                                       }
+                                                       className="text-cyan-500 cursor-pointer"
+                                                  >
+                                                       Dang nhap
+                                                  </Typography>
+                                             </>
+                                        )}
                                    </Box>
                               </Box>
 

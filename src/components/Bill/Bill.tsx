@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom"
 const Bill = () => {
      const selectOrder = useAppSelector((state) => state.order.arrayMyOrder)
      const navigate = useNavigate()
+
      return (
           <>
                <Button variant="contained" onClick={() => navigate("/order")}>

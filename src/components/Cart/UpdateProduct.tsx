@@ -132,6 +132,7 @@ const UpdateProduct = () => {
           setOpenCart(true)
           setOpenMenu(false)
      }
+     const dataLocal = JSON.parse(localStorage.getItem("userss") as string)
 
      return (
           <>
@@ -160,13 +161,22 @@ const UpdateProduct = () => {
                     alt=""
                     className="h-[650px] w-full object-cover"
                />
-               <Button
-                    variant="outlined"
-                    onClick={clickAddProduct}
-                    className="my-[20px]"
-               >
-                    Thêm sản phẩm
-               </Button>
+               {dataLocal.some(
+                    (data: userType) =>
+                         data.userName == "admin@gmail.com" &&
+                         data.status == true
+               ) ? (
+                    <Button
+                         variant="outlined"
+                         onClick={clickAddProduct}
+                         className="my-[20px]"
+                    >
+                         Thêm sản phẩm
+                    </Button>
+               ) : (
+                    ""
+               )}
+
                <TextField
                     id="input-with-icon-textfield"
                     label="Text Search"
@@ -247,31 +257,40 @@ const UpdateProduct = () => {
                                                        Giá sản phẩm:{" "}
                                                        {formattedPrice}
                                                   </Typography>
-                                                  <Box className="flex justify-between">
-                                                       <Button
-                                                            variant="outlined"
-                                                            onClick={() =>
-                                                                 updateItem(
-                                                                      product.id as number,
-                                                                      product.name,
-                                                                      product.price,
-                                                                      product.pathImg
-                                                                 )
-                                                            }
-                                                       >
-                                                            Update
-                                                       </Button>
-                                                       <Button
-                                                            variant="outlined"
-                                                            onClick={() =>
-                                                                 deleteItem(
-                                                                      product.id as number
-                                                                 )
-                                                            }
-                                                       >
-                                                            Xóa
-                                                       </Button>
-                                                  </Box>
+                                                  {dataLocal.some(
+                                                       (data: userType) =>
+                                                            data.userName ==
+                                                                 "admin@gmail.com" &&
+                                                            data.status == true
+                                                  ) ? (
+                                                       <Box className="flex justify-between">
+                                                            <Button
+                                                                 variant="outlined"
+                                                                 onClick={() =>
+                                                                      updateItem(
+                                                                           product.id as number,
+                                                                           product.name,
+                                                                           product.price,
+                                                                           product.pathImg
+                                                                      )
+                                                                 }
+                                                            >
+                                                                 Update
+                                                            </Button>
+                                                            <Button
+                                                                 variant="outlined"
+                                                                 onClick={() =>
+                                                                      deleteItem(
+                                                                           product.id as number
+                                                                      )
+                                                                 }
+                                                            >
+                                                                 Xóa
+                                                            </Button>
+                                                       </Box>
+                                                  ) : (
+                                                       ""
+                                                  )}
                                              </Box>
                                         </Box>
                                    </Box>

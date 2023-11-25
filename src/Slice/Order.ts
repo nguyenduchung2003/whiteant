@@ -16,7 +16,6 @@ export const slice = createSlice({
      initialState,
      reducers: {
           addItem: (state, action) => {
-               console.log("Run slice add Item")
                if (
                     state.arrayOrderProduct.some(
                          (item) => item.id == action?.payload.id

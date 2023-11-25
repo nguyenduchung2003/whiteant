@@ -24,7 +24,7 @@ const Information = () => {
                          </Box>
                     </Box>
                     <Box className="w-[50%] bg-[#f5f5f5] h-screen">
-                         <Typography className="text-sm flex  flex-col scale-90 gap-4">
+                         <Box className="text-sm flex  flex-col scale-90 gap-4">
                               <Typography>
                                    <strong>
                                         Công ty CP Kiến Trắng (whiteant-jsc):
@@ -127,7 +127,7 @@ const Information = () => {
                                         Công ty CP Kiến Trắng (White Ant-JSC)
                                    </strong>
                               </Typography>
-                         </Typography>
+                         </Box>
                     </Box>
                </Box>
                <Typography className="font-bold text-[30px] py-[30px] text-center">

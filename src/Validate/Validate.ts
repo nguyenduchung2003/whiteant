@@ -6,6 +6,7 @@ const emailExistsInLocalStorage = (value: string) => {
      const existingEmails: userType[] = JSON.parse(
           localStorage.getItem("userss") || "[]"
      )
+     console.log(existingEmails)
      return existingEmails.some((user) => user.userName === value)
 }
 const checkUserEmail = (value: string) => {
@@ -45,15 +46,15 @@ export const useSchemasLogin = yup.object().shape({
      email: yup
           .string()
           .matches(emailRegExp, "Email is not in correct format")
-          .required("Please enter Email")
-          .test("checkEmail", "Emaill faild", function (value) {
-               return !checkUserEmail(value)
-          }),
+          .required("Please enter Email"),
+     // .test("checkEmail", "Emaill faild", function (value) {
+     //      return !checkUserEmail(value)
+     // }),
      password: yup
           .string()
           .min(6, "Password must have at least 6 characters")
-          .required("Please enter a password")
-          .test("checkPassword", "Password faild", function (value) {
-               return !checkUserPassword(value)
-          }),
+          .required("Please enter a password"),
+     // .test("checkPassword", "Password faild", function (value) {
+     //      return !checkUserPassword(value)
+     // }),
 })
