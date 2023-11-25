@@ -10,7 +10,7 @@ interface Props {
      arrayDataProduct: arrayOrderProduct[]
 }
 
-const FrameListProduct = ({ arrayDataProduct }: Props) => {
+const ProductFameListCart = ({ arrayDataProduct }: Props) => {
      const selectOrder = useAppSelector(
           (state) => state.order.arrayOrderProduct
      )
@@ -131,4 +131,4 @@ const FrameListProduct = ({ arrayDataProduct }: Props) => {
      )
 }
 
-export default FrameListProduct
+export default ProductFameListCart

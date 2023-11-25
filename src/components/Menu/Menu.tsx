@@ -53,7 +53,6 @@ const Menu = ({
                          subheader={
                               <>
                                    <Box className="flex relative">
-                                        
                                         <ListSubheader
                                              component="div"
                                              id="nested-list-subheader"
@@ -154,6 +153,14 @@ const Menu = ({
                                    primary="QUẢN LÝ SẢN PHẨM"
                                    onClick={() => {
                                         navigate("/order")
+                                   }}
+                              />
+                         </ListItemButton>
+                         <ListItemButton>
+                              <ListItemText
+                                   primary="BILL"
+                                   onClick={() => {
+                                        navigate("/bill")
                                    }}
                               />
                          </ListItemButton>

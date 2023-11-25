@@ -16,9 +16,12 @@ export const slice = createSlice({
      initialState,
      reducers: {
           addItem: (state, action) => {
+               console.log(action.payload)
                if (
                     state.arrayOrderProduct.some(
-                         (item) => item.id == action?.payload.id
+                         (item) =>
+                              item.id == action?.payload.id &&
+                              item.emailNow == action.payload.emailNow
                     )
                ) {
                     state.arrayOrderProduct.forEach(
@@ -55,7 +58,14 @@ export const slice = createSlice({
                }
           },
           completeMyOrder: (state, action) => {
-               state.arrayOrderProduct = []
+               const dataLocal: userType[] = JSON.parse(
+                    localStorage.getItem("userss") as string
+               )
+               const x = dataLocal.filter((user) => user.status == true)
+               const userNow = Object.assign({}, x)[0]
+               state.arrayOrderProduct = state.arrayOrderProduct.filter(
+                    (item) => item.emailNow !== userNow.userName
+               )
                state.arrayMyOrder.push(action.payload)
           },
      },

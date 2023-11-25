@@ -106,12 +106,18 @@ const UpdateProduct = () => {
           name: string,
           price: string
      ) => {
+          const dataLocal: userType[] = JSON.parse(
+               localStorage.getItem("userss") as string
+          )
+          const x = dataLocal.filter((user) => user.status == true)
+          const userNow = Object.assign({}, x)[0]
           const newItem: arrayOrderProduct = {
                id: id,
                pathImg: path,
                name: name,
                price: price,
                quantity: 1,
+               emailNow: userNow.userName,
           }
           await dispatch(addItem(newItem))
           toast.success("Thêm vào giỏ hàng thành công", {

@@ -16,9 +16,18 @@ const ProductCart = () => {
           (state) => state.order.arrayOrderProduct
      )
      const dispatch = useAppDispatch()
+     const dataLocal: userType[] = JSON.parse(
+          localStorage.getItem("userss") as string
+     )
+     const x = dataLocal.filter((user) => user.status == true)
+     const userNow = Object.assign({}, x)[0]
      return (
           <>
-               <ProductFameListCart arrayDataProduct={selectOrder} />
+               <ProductFameListCart
+                    arrayDataProduct={selectOrder.filter(
+                         (item) => item.emailNow == userNow.userName
+                    )}
+               />
           </>
      )
 }
