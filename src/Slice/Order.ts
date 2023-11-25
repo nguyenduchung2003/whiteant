@@ -4,6 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit"
 const initialState: arrayOrderProduct[] = []
 
 export const slice = createSlice({
+     
      name: "order",
      initialState,
      reducers: {

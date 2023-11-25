@@ -2,18 +2,13 @@ import { Box, Typography, Button } from "@mui/material"
 import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
-import ProductCart from "../Cart/ProductCart";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Cart = ({
-  setOpenCart,
+const Search = ({
+  setOpenSearch,
 }: {
-  setOpenCart: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -22,17 +17,9 @@ const Cart = ({
     setOpen(!open);
   };
 
-  const ClickCloseCart = () => {
-    setOpenCart(false);
+  const ClickCloseSearch = () => {
+    setOpenSearch(false);
   };
-
-  const storedData: userType[] = JSON.parse(
-    localStorage.getItem("userss") as string
-  );
-  interface userType {
-    price: string;
-    // ... other properties of userType
-  }
   return (
     <>
       <Box className="w-full h-full  fixed">
@@ -52,11 +39,11 @@ const Cart = ({
                   component="div"
                   id="nested-list-subheader"
                 >
-                  Giỏ hàng
+                  Search
                 </ListSubheader>
                 <Box
                   className="absolute right-0"
-                  onClick={ClickCloseCart}
+                  onClick={ClickCloseSearch}
                 >
                   X
                 </Box>
@@ -64,8 +51,7 @@ const Cart = ({
             </>
           }
         >
-          {/* Content of the cart */}
-          <ProductCart />
+          {/* Content of the Search */}
 
           {/* Button to Checkout */}
           <Box className="
@@ -75,17 +61,6 @@ const Cart = ({
             w-full
             mt-5
             ">
-            <Button variant="contained" className="ml-5 bg-black" onClick={() => {
-              navigate("/checkout");
-            }}>
-              Xem giỏ hàng
-            </Button>
-            {/* Button to View Cart */}
-            <Button variant="contained" className="mr-5 bg-black" onClick={() => {
-              navigate("/checkout");
-            }}>
-              Thanh toán
-            </Button>
           </Box>
         </List>
       </Box>
@@ -93,4 +68,4 @@ const Cart = ({
   );
 };
 
-export default Cart;
+export default Search;

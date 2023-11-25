@@ -33,7 +33,7 @@ const FrameListProduct = ({ title, arrayDataProduct }: Props) => {
                   className="w-[348px] h-[522px]"
                 />
                 <Typography
-                  className="absolute invisible top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center group-hover/item:visible"
+                  className=" absolute invisible top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center group-hover/item:visible"
                   onClick={() => handleAddToCart(product)}
                 >
                   MUA NGAY &rarr;

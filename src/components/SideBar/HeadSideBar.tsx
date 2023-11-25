@@ -14,10 +14,10 @@ const HeadSideBar = ({ ClickOpenMenu, ClickOpenCart }: { ClickOpenMenu?: () => v
           </a>
         </Box>
         <Box className="flex gap-10 justify-center items-center w-[250px]">
-          <SearchIcon fontSize="large" />
-          <ShoppingBagOutlinedIcon fontSize="large" onClick={ClickOpenCart} />
+          <SearchIcon className="cursor-pointer"  fontSize="large" />
+          <ShoppingBagOutlinedIcon className="cursor-pointer" fontSize="large" onClick={ClickOpenCart} />
           <Box>
-            <MenuOutlinedIcon fontSize="large" onClick={ClickOpenMenu} />
+            <MenuOutlinedIcon className="cursor-pointer" fontSize="large" onClick={ClickOpenMenu} />
             Menu
           </Box>
         </Box>

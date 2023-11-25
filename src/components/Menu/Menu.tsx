@@ -44,7 +44,7 @@ const Menu = ({
                     <List
                          sx={{
                               width: "100%",
-                              maxWidth: 360,
+                              maxWidth: 485,
                               bgcolor: "background.paper",
                          }}
                          className="h-full absolute right-0 bg-white overflow-y-auto"
@@ -53,6 +53,7 @@ const Menu = ({
                          subheader={
                               <>
                                    <Box className="flex relative">
+                                        
                                         <ListSubheader
                                              component="div"
                                              id="nested-list-subheader"
@@ -60,7 +61,7 @@ const Menu = ({
                                              Menu
                                         </ListSubheader>
                                         <Box
-                                             className="absolute right-0"
+                                             className="absolute right-0 cursor-pointer"
                                              onClick={ClickCloseMenu}
                                         >
                                              X
