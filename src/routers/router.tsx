@@ -3,6 +3,8 @@ import App from "../App"
 import Register from "../components/Register"
 import Login from "../components/Login"
 import Order from "../components/Cart/UpdateProduct"
+import CheckOut from "../components/CheckOut"
+import Bill from "../components/Bill"
 const router = createBrowserRouter([
      {
           path: "/",
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
      {
           path: "/order",
           element: <Order />,
+     },
+     {
+          path: "/checkout",
+          element: <CheckOut />,
+     },
+     {
+          path: "/bill",
+          element: <Bill />,
      },
 ])
 export default router

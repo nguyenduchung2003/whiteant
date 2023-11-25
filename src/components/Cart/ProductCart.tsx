@@ -12,7 +12,9 @@ import { useAppSelector, useAppDispatch } from "../../hook"
 import { addItem } from "../../Slice/Order"
 
 const ProductCart = () => {
-     const selectOrder = useAppSelector((state) => state.order)
+     const selectOrder = useAppSelector(
+          (state) => state.order.arrayOrderProduct
+     )
      const dispatch = useAppDispatch()
      return (
           <>

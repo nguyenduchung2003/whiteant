@@ -12,5 +12,25 @@ declare global {
           list: number[]
           status: boolean
      }
+     interface arrayOrderProduct {
+          id?: number
+          pathImg: string
+          name: string
+          price: string
+          quantity: number
+     }
+     interface arrayMyOrder {
+          name?: string
+          email?: string
+          numberPhone?: string
+          address?: string
+          valueShip?: string
+          valuePayment?: string
+          nameProvince?: string
+          nameDistrict?: string
+          nameWard?: string
+          totalAmount?: number
+          arrayOder?: arrayOrderProduct[]
+     }
 }
 export {}

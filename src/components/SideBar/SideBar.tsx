@@ -34,7 +34,7 @@ const SideBar = ({
                          </Box>
                     </Box>
                </Box> */}
-               <HeadSideBar ClickOpenMenu={ClickOpenMenu} />
+               {/* <HeadSideBar ClickOpenMenu={ClickOpenMenu} /> */}
                <hr />
                <HeaderContent />
                <hr />

@@ -1,17 +1,28 @@
 import HeadSideBar from "../SideBar/HeadSideBar"
-import { Box, Typography, Button } from "@mui/material"
+import {
+     Box,
+     Typography,
+     Button,
+     InputAdornment,
+     TextField,
+} from "@mui/material"
 import allProduct from "../../Image/allProduct.webp"
 import dataProduct from "./dataProduct"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import DialogList from "./DialogList"
 import Menu from "../Menu"
 import { useAppSelector, useAppDispatch } from "../../hook"
 import { addItem } from "../../Slice/Order"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import Cart from "./Cart"
+import SearchIcon from "@mui/icons-material/Search"
 const UpdateProduct = () => {
-     const selectOrder = useAppSelector((state) => state.order)
+     const [textSearch, setTextSearch] = useState<string>("")
+     const selectOrder = useAppSelector(
+          (state) => state.order.arrayOrderProduct
+     )
      const dispatch = useAppDispatch()
      const [updateList, setUpdateList] = useState<boolean>(false)
      const [open, setOpen] = useState(false)
@@ -22,6 +33,7 @@ const UpdateProduct = () => {
      const [picture, setPicture] = useState<string>("")
 
      const [data, setData] = useState(dataProduct)
+
      const clickAddProduct = () => {
           setUpdateList(false)
           setOpen(true)
@@ -102,7 +114,7 @@ const UpdateProduct = () => {
                quantity: 1,
           }
           await dispatch(addItem(newItem))
-          toast.success("Them item thanh cong", {
+          toast.success("Thêm vào giỏ hàng thành công", {
                position: "top-right",
                autoClose: 3000,
                hideProgressBar: false,
@@ -114,13 +126,30 @@ const UpdateProduct = () => {
           })
      }
 
+     const [openCart, setOpenCart] = useState<boolean>(false) // New state for cart visibility
+
+     const ClickOpenCart = () => {
+          setOpenCart(true)
+          setOpenMenu(false)
+     }
+
      return (
           <>
                <ToastContainer />
-               <HeadSideBar ClickOpenMenu={ClickOpenMenu} />
+               <HeadSideBar
+                    ClickOpenMenu={ClickOpenMenu}
+                    ClickOpenCart={ClickOpenCart}
+               />
                {openMenu ? (
                     <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
                          <Menu setOpenMenu={setOpenMenu} />
+                    </Box>
+               ) : (
+                    ""
+               )}
+               {openCart ? (
+                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
+                         <Cart setOpenCart={setOpenCart} />
                     </Box>
                ) : (
                     ""
@@ -131,7 +160,27 @@ const UpdateProduct = () => {
                     alt=""
                     className="h-[650px] w-full object-cover"
                />
-               <Button onClick={clickAddProduct}>Thêm sản phẩm</Button>
+               <Button
+                    variant="outlined"
+                    onClick={clickAddProduct}
+                    className="my-[20px]"
+               >
+                    Thêm sản phẩm
+               </Button>
+               <TextField
+                    id="input-with-icon-textfield"
+                    label="Text Search"
+                    value={textSearch}
+                    onChange={(e) => setTextSearch(e.target.value)}
+                    InputProps={{
+                         startAdornment: (
+                              <InputAdornment position="start">
+                                   <SearchIcon />
+                              </InputAdornment>
+                         ),
+                    }}
+                    variant="filled"
+               />
                <DialogList
                     updateList={updateList}
                     open={open}
@@ -146,71 +195,88 @@ const UpdateProduct = () => {
                     picture={picture}
                ></DialogList>
 
-               <Box className="flex gap-5 justify-center">
-                    {data.map((product, index) => {
-                         const formattedPrice = Number(
-                              product.price
-                         ).toLocaleString("vi-VN", {
-                              style: "currency",
-                              currency: "VND",
+               <Box className="flex gap-5 justify-center flex-wrap">
+                    {data
+                         .filter((item) => {
+                              if (textSearch == "") {
+                                   return item
+                              } else if (
+                                   item.name
+                                        .toLowerCase()
+                                        .includes(textSearch.toLowerCase())
+                              ) {
+                                   return item
+                              }
                          })
-                         return (
-                              <Box
-                                   key={index}
-                                   className="flex flex-col gap-5 group/item relative"
-                              >
-                                   <img
-                                        src={`${product.pathImg}`}
-                                        alt=""
-                                        className="w-[348px] h-[522px] "
-                                   />
-                                   <Typography
-                                        onClick={() =>
-                                             handlerAddItemOrder(
-                                                  product.id as number,
-                                                  product.pathImg,
-                                                  product.name,
-                                                  product.price
-                                             )
-                                        }
-                                        className="absolute invisible  top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center  group-hover/item:visible"
+                         .map((product, index) => {
+                              const formattedPrice = Number(
+                                   product.price
+                              ).toLocaleString("vi-VN", {
+                                   style: "currency",
+                                   currency: "VND",
+                              })
+                              return (
+                                   <Box
+                                        key={index}
+                                        className="flex flex-col gap-5 group/item relative"
                                    >
-                                        MUA NGAY &rarr;
-                                   </Typography>
-                                   <Box className="w-[340px] flex flex-col gap-3">
-                                        <Typography className="truncate">
-                                             Tên sản phẩm: {product.name}
+                                        <img
+                                             src={`${product.pathImg}`}
+                                             alt=""
+                                             className="w-[348px] h-[522px] "
+                                        />
+                                        <Typography
+                                             onClick={() =>
+                                                  handlerAddItemOrder(
+                                                       product.id as number,
+                                                       product.pathImg,
+                                                       product.name,
+                                                       product.price
+                                                  )
+                                             }
+                                             className="absolute invisible  top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center  group-hover/item:visible"
+                                        >
+                                             MUA NGAY &rarr;
                                         </Typography>
-                                        <Box>
-                                             <Typography className="">
-                                                  Giá sản phẩm: {formattedPrice}
+                                        <Box className="w-[340px] flex flex-col gap-3">
+                                             <Typography className="truncate">
+                                                  Tên sản phẩm: {product.name}
                                              </Typography>
-                                             <Button
-                                                  onClick={() =>
-                                                       updateItem(
-                                                            product.id as number,
-                                                            product.name,
-                                                            product.price,
-                                                            product.pathImg
-                                                       )
-                                                  }
-                                             >
-                                                  Update
-                                             </Button>
-                                             <Button
-                                                  onClick={() =>
-                                                       deleteItem(
-                                                            product.id as number
-                                                       )
-                                                  }
-                                             >
-                                                  Xóa
-                                             </Button>
+                                             <Box>
+                                                  <Typography className="">
+                                                       Giá sản phẩm:{" "}
+                                                       {formattedPrice}
+                                                  </Typography>
+                                                  <Box className="flex justify-between">
+                                                       <Button
+                                                            variant="outlined"
+                                                            onClick={() =>
+                                                                 updateItem(
+                                                                      product.id as number,
+                                                                      product.name,
+                                                                      product.price,
+                                                                      product.pathImg
+                                                                 )
+                                                            }
+                                                       >
+                                                            Update
+                                                       </Button>
+                                                       <Button
+                                                            variant="outlined"
+                                                            onClick={() =>
+                                                                 deleteItem(
+                                                                      product.id as number
+                                                                 )
+                                                            }
+                                                       >
+                                                            Xóa
+                                                       </Button>
+                                                  </Box>
+                                             </Box>
                                         </Box>
                                    </Box>
-                              </Box>
-                         )
-                    })}
+                              )
+                         })}
                </Box>
           </>
      )

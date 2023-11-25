@@ -1,52 +1,57 @@
-import { Box, Button, Typography, Input, IconButton, } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import { Box, Button, Typography, Input, IconButton } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete"
+import AddIcon from "@mui/icons-material/Add"
+import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule"
 
-import { useAppSelector, useAppDispatch } from "../../hook";
-import { deleteItem, updateItem } from "../../Slice/Order";
+import { useAppSelector, useAppDispatch } from "../../hook"
+import { deleteItem, updateItem } from "../../Slice/Order"
 
 interface Props {
-     arrayDataProduct: arrayOrderProduct[];
+     arrayDataProduct: arrayOrderProduct[]
 }
 
 const FrameListProduct = ({ arrayDataProduct }: Props) => {
-     const selectOrder = useAppSelector((state) => state.order);
-     const dispatch = useAppDispatch();
+     const selectOrder = useAppSelector(
+          (state) => state.order.arrayOrderProduct
+     )
+     const dispatch = useAppDispatch()
 
      const deleteProduct = async (id: number) => {
-          await dispatch(deleteItem(id || 0));
-     };
+          await dispatch(deleteItem(id || 0))
+     }
 
      const updateProductTang = async (id: number) => {
           const type = {
                type: "tang",
                id: id,
-          };
-          await dispatch(updateItem(type));
-     };
+          }
+          await dispatch(updateItem(type))
+     }
 
      const updateProductGiam = async (id: number) => {
           const type = {
                type: "giam",
                id: id,
-          };
-          await dispatch(updateItem(type));
-     };
+          }
+          await dispatch(updateItem(type))
+     }
 
      // Format total amount to VND
-     const totalAmount = arrayDataProduct.reduce(
+     const totalAmount = arrayDataProduct?.reduce(
           (total, product) =>
                total + product.quantity * (product.price as unknown as number),
           0
-     );
+     )
 
      return (
           <>
                <Box className="flex flex-col gap-5 ml-5">
-                    {arrayDataProduct.map((product, index) => {
+                    {arrayDataProduct?.map((product, index) => {
                          return (
-                              <Box key={index} className="flex gap-5 group/item relative">
+                              <Box
+                                   key={index}
+                                   className="flex gap-5 group/item relative"
+                              >
                                    <img
                                         src={`${product.pathImg}`}
                                         alt=""
@@ -60,13 +65,19 @@ const FrameListProduct = ({ arrayDataProduct }: Props) => {
                                              {new Intl.NumberFormat("vi-VN", {
                                                   style: "currency",
                                                   currency: "VND",
-                                             }).format(product.price as unknown as number)}
+                                             }).format(
+                                                  product.price as unknown as number
+                                             )}
                                         </Typography>
                                         <Box className="flex">
                                              <Button
                                                   className="w-[20px] h-[20px] content-center mr-3 text-white rounded-full bg-black"
                                                   variant="contained"
-                                                  onClick={() => updateProductTang(product.id as number)}
+                                                  onClick={() =>
+                                                       updateProductTang(
+                                                            product.id as number
+                                                       )
+                                                  }
                                              >
                                                   +
                                              </Button>
@@ -78,19 +89,31 @@ const FrameListProduct = ({ arrayDataProduct }: Props) => {
                                              />
                                              <Button
                                                   className="w-[10px] h-[20px] content-center mr-3 text-white rounded-full  bg-black"
-                                                  disabled={product.quantity <= 1}
+                                                  disabled={
+                                                       product.quantity <= 1
+                                                  }
                                                   variant="contained"
-                                                  onClick={() => updateProductGiam(product.id as number)}
+                                                  onClick={() =>
+                                                       updateProductGiam(
+                                                            product.id as number
+                                                       )
+                                                  }
                                              >
                                                   -
                                              </Button>
                                         </Box>
                                    </Box>
-                                   <IconButton className="absolute top-0 right-0" aria-label="delete" onClick={() => deleteProduct(product.id as number)}>
+                                   <IconButton
+                                        className="absolute top-0 right-0"
+                                        aria-label="delete"
+                                        onClick={() =>
+                                             deleteProduct(product.id as number)
+                                        }
+                                   >
                                         <DeleteIcon />
                                    </IconButton>
                               </Box>
-                         );
+                         )
                     })}
                </Box>
 
@@ -101,11 +124,11 @@ const FrameListProduct = ({ arrayDataProduct }: Props) => {
                          {new Intl.NumberFormat("vi-VN", {
                               style: "currency",
                               currency: "VND",
-                         }).format(totalAmount)}
+                         }).format(totalAmount || 0)}
                     </Typography>
                </Box>
           </>
-     );
-};
+     )
+}
 
-export default FrameListProduct;
+export default FrameListProduct

@@ -1,45 +1,69 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
-const initialState: arrayOrderProduct[] = []
+interface initialStateType {
+     arrayOrderProduct: arrayOrderProduct[]
+     arrayMyOrder: arrayMyOrder[]
+}
+
+const initialState: initialStateType = {
+     arrayOrderProduct: [],
+     arrayMyOrder: [],
+}
 
 export const slice = createSlice({
-     
      name: "order",
      initialState,
      reducers: {
           addItem: (state, action) => {
                console.log("Run slice add Item")
-               if (state.some((item) => item.id == action?.payload.id)) {
-                    state.forEach(
+               if (
+                    state.arrayOrderProduct.some(
+                         (item) => item.id == action?.payload.id
+                    )
+               ) {
+                    state.arrayOrderProduct.forEach(
                          (item) => (item.quantity += action?.payload.quantity)
                     )
                } else {
-                    state.push(action?.payload)
+                    state.arrayOrderProduct.push(action?.payload)
                }
           },
-          deleteItem: (state, action: PayloadAction<number>) => {
-               return state.filter((item) => item.id != action.payload)
+          deleteItem: (state, action) => {
+               // return state.arrayOrderProduct.filter(
+               //      (item) => item.id != action.payload
+               // )
+               return {
+                    ...state,
+                    arrayOrderProduct: state.arrayOrderProduct.filter(
+                         (item) => item.id !== action.payload
+                    ),
+               }
           },
           updateItem: (state, action) => {
                if (action.payload.type == "tang") {
-                    state.forEach((item) => {
+                    state.arrayOrderProduct.forEach((item) => {
                          if (item.id == action.payload.id) {
                               item.quantity++
                          }
                     })
                } else {
-                    state.forEach((item) => {
+                    state.arrayOrderProduct.forEach((item) => {
                          if (item.id == action.payload.id) {
                               item.quantity--
                          }
                     })
                }
           },
+          completeMyOrder: (state, action) => {
+               state.arrayOrderProduct = []
+               state.arrayMyOrder.push(action.payload)
+          },
      },
 })
 
 // Action creators are generated for each case reducer function
-export const { addItem, deleteItem, updateItem } = slice.actions
+export const { addItem, deleteItem, updateItem, completeMyOrder } =
+     slice.actions
 
 export default slice.reducer
