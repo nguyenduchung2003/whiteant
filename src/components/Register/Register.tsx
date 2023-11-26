@@ -118,7 +118,7 @@ const Register = () => {
                                    JSON.stringify(updatedUsers)
                               )
 
-                              navigate("/login")
+                              navigate("/whiteant/login")
 
                               actions.setSubmitting(false)
                          }}

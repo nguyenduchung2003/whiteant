@@ -7,27 +7,27 @@ import CheckOut from "../components/CheckOut"
 import Bill from "../components/Bill"
 const router = createBrowserRouter([
      {
-          path: "/",
+          path: "/whiteant/",
           element: <App />,
      },
      {
-          path: "/register",
+          path: "/whiteant//register",
           element: <Register />,
      },
      {
-          path: "/login",
+          path: "/whiteant/login",
           element: <Login />,
      },
      {
-          path: "/order",
+          path: "/whiteant/order",
           element: <Order />,
      },
      {
-          path: "/checkout",
+          path: "/whiteant/checkout",
           element: <CheckOut />,
      },
      {
-          path: "/bill",
+          path: "/whiteant/bill",
           element: <Bill />,
      },
 ])

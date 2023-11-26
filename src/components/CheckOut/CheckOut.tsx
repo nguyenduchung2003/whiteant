@@ -120,7 +120,7 @@ const CheckOut = () => {
                     theme: "light",
                })
                await dispatch(completeMyOrder(newOrder))
-               navigate("/bill")
+               navigate("/whiteant/bill")
                console.log(newOrder)
           }
      }
@@ -144,7 +144,7 @@ const CheckOut = () => {
                <ToastContainer />
                <Box className="flex ml-10 h-[1000px]">
                     <Box className="w-[50%]">
-                         <Button onClick={() => navigate("/")}>
+                         <Button onClick={() => navigate("/whiteant/")}>
                               {" "}
                               <img
                                    className="w-[100px]"
@@ -169,7 +169,9 @@ const CheckOut = () => {
                                                   </Typography>
                                                   <Typography
                                                        onClick={() =>
-                                                            navigate("/login")
+                                                            navigate(
+                                                                 "/whiteant/login"
+                                                            )
                                                        }
                                                        className="text-cyan-500 cursor-pointer"
                                                   >

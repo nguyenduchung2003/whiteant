@@ -152,7 +152,7 @@ const Menu = ({
                               <ListItemText
                                    primary="TẤT CẢ SẢN PHẨM"
                                    onClick={() => {
-                                        navigate("/order")
+                                        navigate("/whiteant/order")
                                    }}
                               />
                          </ListItemButton>
@@ -160,7 +160,7 @@ const Menu = ({
                               <ListItemText
                                    primary="BILL"
                                    onClick={() => {
-                                        navigate("/bill")
+                                        navigate("/whiteant/bill")
                                    }}
                               />
                          </ListItemButton>
@@ -171,14 +171,14 @@ const Menu = ({
                                    <ListItemText
                                         primary="Đăng xuất"
                                         onClick={() => {
-                                             navigate("/login")
+                                             navigate("/whiteant/login")
                                         }}
                                    />
                               ) : (
                                    <ListItemText
                                         primary="Đăng nhập"
                                         onClick={() => {
-                                             navigate("/login")
+                                             navigate("/whiteant/login")
                                         }}
                                    />
                               )}

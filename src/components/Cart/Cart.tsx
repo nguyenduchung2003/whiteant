@@ -75,7 +75,7 @@ const Cart = ({
                                    variant="contained"
                                    className=" bg-black w-[90%]"
                                    onClick={() => {
-                                        navigate("/checkout")
+                                        navigate("/whiteant/checkout")
                                    }}
                               >
                                    Thanh toán

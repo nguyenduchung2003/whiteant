@@ -161,7 +161,7 @@ const Login = () => {
                                              value.passWord == values.password
                                         ) {
                                              value.status = true
-                                             navigate("/")
+                                             navigate("/whiteant/")
                                         } else {
                                              console.log(
                                                   "Fail to update session"

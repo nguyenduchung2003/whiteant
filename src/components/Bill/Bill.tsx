@@ -111,7 +111,7 @@ const Bill = () => {
                <Button
                     variant="contained"
                     className="bg-black m-5"
-                    onClick={() => navigate("/order")}
+                    onClick={() => navigate("/whiteant/order")}
                >
                     BACK
                </Button>
