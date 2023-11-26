@@ -9,18 +9,18 @@ const emailExistsInLocalStorage = (value: string) => {
      console.log(existingEmails)
      return existingEmails.some((user) => user.userName === value)
 }
-const checkUserEmail = (value: string) => {
-     const existingEmails: userType[] = JSON.parse(
-          localStorage.getItem("userss") || "[]"
-     )
-     return existingEmails.some((user) => user.userName === value)
-}
-const checkUserPassword = (value: string) => {
-     const existingEmails: userType[] = JSON.parse(
-          localStorage.getItem("userss") || "[]"
-     )
-     return existingEmails.some((user) => user.passWord === value)
-}
+// const checkUserEmail = (value: string) => {
+//      const existingEmails: userType[] = JSON.parse(
+//           localStorage.getItem("userss") || "[]"
+//      )
+//      return existingEmails.some((user) => user.userName === value)
+// }
+// const checkUserPassword = (value: string) => {
+//      const existingEmails: userType[] = JSON.parse(
+//           localStorage.getItem("userss") || "[]"
+//      )
+//      return existingEmails.some((user) => user.passWord === value)
+// }
 
 export const useSchemasRegister = yup.object().shape({
      // checkEmail: yup.boolean(),

@@ -8,7 +8,7 @@ import {
      TextField,
      Input,
 } from "@mui/material"
-import { useState } from "react"
+// import { useState } from "react"
 interface Props {
      open: boolean
      handleClose: () => void
@@ -49,8 +49,14 @@ Props) => {
      //      }
      //    };
      // const [picture, setPicture] = useState <string>("")
-     const onChangePicture = (e) => {
-          setPicture(URL.createObjectURL(e.target.files[0]))
+     // const onChangePicture = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+
+     //      setPicture(URL.createObjectURL(e.target.files[0]))
+     // }
+     const onChangePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
+          if (e.target.files && e.target.files.length > 0) {
+               setPicture(URL.createObjectURL(e.target.files[0]))
+          }
      }
      return (
           <>
@@ -83,7 +89,11 @@ Props) => {
                               }
                          ></TextField>
                          <br />
-                         <Input type="file" onChange={onChangePicture} className="w-[100%]"></Input>
+                         <Input
+                              type="file"
+                              onChange={onChangePicture}
+                              className="w-[100%]"
+                         ></Input>
                          <img
                               className="playerProfilePic_home_tile"
                               src={picture && picture}
