@@ -67,11 +67,12 @@ Props) => {
                     aria-describedby="alert-dialog-description"
                >
                     <DialogTitle id="alert-dialog-title">
-                         {updateList ? "Update Item" : "Thêm sản phẩm"}
+                         {updateList ? "CẬP NHẬT SẢN PHẨM" : "THÊM SẢN PHẨM"}
                     </DialogTitle>
                     <DialogContent className="flex flex-col ">
                          <Box>
                               <TextField
+                                   className="mb-[10px]"
                                    variant="standard"
                                    label="Tên sản phẩm"
                                    value={listName}
@@ -100,7 +101,7 @@ Props) => {
                          ></img>
                     </DialogContent>
                     <DialogActions>
-                         <Button onClick={handleClose}>Disagree</Button>
+                         <Button color="error" onClick={handleClose}>Disagree</Button>
                          <Button
                               onClick={
                                    updateList

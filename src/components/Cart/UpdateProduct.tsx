@@ -24,6 +24,9 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Cart from "./Cart"
 import SearchIcon from "@mui/icons-material/Search"
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import AddIcon from '@mui/icons-material/Add';
 import FooterContent from "../Footer/FooterContent"
 const UpdateProduct = () => {
      const [textSearch, setTextSearch] = useState<string>("")
@@ -184,6 +187,7 @@ const UpdateProduct = () => {
                               onClick={clickAddProduct}
                               className="my-[20px]  absolute left-10 "
                          >
+                              <AddIcon className="" />
                               Thêm sản phẩm
                          </Button>
                     ) : (
@@ -192,18 +196,18 @@ const UpdateProduct = () => {
 
                     <TextField
                          id="input-with-icon-textfield"
-                         label="Text Search"
                          value={textSearch}
                          onChange={(e) => setTextSearch(e.target.value)}
                          InputProps={{
                               startAdornment: (
                                    <InputAdornment position="start">
-                                        <SearchIcon />
+                                        <SearchIcon fontSize="small" />
                                    </InputAdornment>
                               ),
                          }}
-                         variant="filled"
-                         className="my-[20px] w-[500px] absolute right-[35px] "
+                         variant="outlined"
+                         fullWidth
+                         className="my-[20px] h-[40px] w-[500px] absolute right-[35px] "
                     />
                     <DialogList
                          updateList={updateList}
@@ -279,7 +283,7 @@ const UpdateProduct = () => {
                                                                  data.status ==
                                                                       true
                                                        ) ? (
-                                                            <Box className="flex justify-between">
+                                                            <Box className="flex justify-between mt-5">
                                                                  <Button
                                                                       variant="outlined"
                                                                       onClick={() =>
@@ -291,16 +295,23 @@ const UpdateProduct = () => {
                                                                            )
                                                                       }
                                                                  >
-                                                                      Update
+                                                                     <EditIcon
+                                                                     className="mr-2"
+                                                                     />
+                                                                      Cập nhật
                                                                  </Button>
                                                                  <Button
                                                                       variant="outlined"
+                                                                      color="error"
                                                                       onClick={() =>
                                                                            deleteItem(
                                                                                 product.id as number
                                                                            )
                                                                       }
                                                                  >
+                                                                     <DeleteIcon
+                                                                      className="mr-2"
+                                                                     />
                                                                       Xóa
                                                                  </Button>
                                                             </Box>
