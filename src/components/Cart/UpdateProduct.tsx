@@ -15,24 +15,24 @@ import {
 } from "react"
 import DialogList from "./DialogList"
 import Menu from "../Menu"
-import {
-     // useAppSelector,
-     useAppDispatch,
-} from "../../hook"
+import { useAppSelector, useAppDispatch } from "../../hook"
 import { addItem } from "../../Slice/Order"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Cart from "./Cart"
 import SearchIcon from "@mui/icons-material/Search"
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
-import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from "@mui/icons-material/Delete"
+import EditIcon from "@mui/icons-material/Edit"
+import AddIcon from "@mui/icons-material/Add"
 import FooterContent from "../Footer/FooterContent"
+import {
+     addItemProduct,
+     updateItemProduct,
+     deleteItemProduct,
+} from "../../Slice/DataProduct"
 const UpdateProduct = () => {
      const [textSearch, setTextSearch] = useState<string>("")
-     // const selectOrder = useAppSelector(
-     //      (state) => state.order.arrayOrderProduct
-     // )
+     const selectProduct = useAppSelector((state) => state.dataProduct)
      const dispatch = useAppDispatch()
      const [updateList, setUpdateList] = useState<boolean>(false)
      const [open, setOpen] = useState(false)
@@ -42,7 +42,7 @@ const UpdateProduct = () => {
      const [listDescription, setListDescription] = useState("")
      const [picture, setPicture] = useState<string>("")
 
-     const [data, setData] = useState(dataProduct)
+     // const [data, setData] = useState(dataProduct)
 
      const clickAddProduct = () => {
           setUpdateList(false)
@@ -60,19 +60,19 @@ const UpdateProduct = () => {
                price: listDescription,
           }
           // console.log(imgData)
-          const x = [...data]
-          x.push(newData)
-          setData(x)
+          // const x = [...data]
+          // x.push(newData)
+          // setData(x)
+          dispatch(addItemProduct(newData))
           setUpdateList(false)
           setOpen(false)
      }
      const deleteItem = (id: number) => {
-          console.log(data)
           console.log(id)
-
-          const x = [...data]
-          const updatedData = x.filter((item) => item.id !== id)
-          setData(updatedData)
+          dispatch(deleteItemProduct(id))
+          // const x = [...data]
+          // const updatedData = x.filter((item) => item.id !== id)
+          // setData(updatedData)
      }
      const [idUpdate, setIdUpdate] = useState(0)
 
@@ -90,17 +90,25 @@ const UpdateProduct = () => {
           setOpen(true)
      }
      const handleAgreeUpdate = () => {
-          const x = data.map((item) => {
-               if (item.id == idUpdate) {
-                    return {
-                         ...item,
-                         pathImg: picture,
-                         name: listName,
-                         price: listDescription,
-                    }
-               } else return item
-          })
-          setData(x)
+          // const x = data.map((item) => {
+          //      if (item.id == idUpdate) {
+          //           return {
+          //                ...item,
+          //                pathImg: picture,
+          //                name: listName,
+          //                price: listDescription,
+          //           }
+          //      } else return item
+          // })
+          const dataUpdate = {
+               id: idUpdate,
+               pathImg: picture,
+               name: listName,
+               price: listDescription,
+          }
+          dispatch(updateItemProduct(dataUpdate))
+
+          // setData(x)
           setUpdateList(false)
           setOpen(false)
      }
@@ -224,7 +232,7 @@ const UpdateProduct = () => {
                     ></DialogList>
 
                     <Box className="flex gap-5 justify-center flex-wrap mt-[100px]">
-                         {data
+                         {selectProduct
                               .filter((item) => {
                                    if (textSearch == "") {
                                         return item
@@ -295,9 +303,7 @@ const UpdateProduct = () => {
                                                                            )
                                                                       }
                                                                  >
-                                                                     <EditIcon
-                                                                     className="mr-2"
-                                                                     />
+                                                                      <EditIcon className="mr-2" />
                                                                       Cập nhật
                                                                  </Button>
                                                                  <Button
@@ -309,9 +315,7 @@ const UpdateProduct = () => {
                                                                            )
                                                                       }
                                                                  >
-                                                                     <DeleteIcon
-                                                                      className="mr-2"
-                                                                     />
+                                                                      <DeleteIcon className="mr-2" />
                                                                       Xóa
                                                                  </Button>
                                                             </Box>

@@ -101,7 +101,9 @@ Props) => {
                          ></img>
                     </DialogContent>
                     <DialogActions>
-                         <Button color="error" onClick={handleClose}>Disagree</Button>
+                         <Button color="error" onClick={handleClose}>
+                              Hủy
+                         </Button>
                          <Button
                               onClick={
                                    updateList
@@ -109,7 +111,7 @@ Props) => {
                                         : handleAgreeAdd
                               }
                          >
-                              Agree
+                              Đồng ý
                          </Button>
                     </DialogActions>
                </Dialog>
