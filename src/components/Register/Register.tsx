@@ -226,9 +226,9 @@ const Register = () => {
                                                                  }}
                                                             >
                                                                  {checkEye ? (
-                                                                      <VisibilityIcon />
-                                                                 ) : (
                                                                       <VisibilityOffIcon />
+                                                                 ) : (
+                                                                      <VisibilityIcon />
                                                                  )}
                                                             </InputAdornment>
                                                        ),
@@ -293,9 +293,9 @@ const Register = () => {
                                                                  }}
                                                             >
                                                                  {checkEyeConfirm ? (
-                                                                      <VisibilityIcon />
-                                                                 ) : (
                                                                       <VisibilityOffIcon />
+                                                                 ) : (
+                                                                      <VisibilityIcon />
                                                                  )}
                                                             </InputAdornment>
                                                        ),
