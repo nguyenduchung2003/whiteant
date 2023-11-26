@@ -61,27 +61,29 @@ Props) => {
                     aria-describedby="alert-dialog-description"
                >
                     <DialogTitle id="alert-dialog-title">
-                         {updateList ? "Update Item" : "Add Item"}
+                         {updateList ? "Update Item" : "Thêm sản phẩm"}
                     </DialogTitle>
                     <DialogContent className="flex flex-col ">
                          <Box>
                               <TextField
                                    variant="standard"
-                                   label="  Name Item"
+                                   label="Tên sản phẩm"
                                    value={listName}
                                    onChange={(e) => setListName(e.target.value)}
                               ></TextField>
                          </Box>
 
                          <TextField
+                              className="mb-[10px]"
                               variant="standard"
-                              label="Price"
+                              label="Giá sản phẩm"
                               value={listDescription}
                               onChange={(e) =>
                                    setListDescription(e.target.value)
                               }
                          ></TextField>
-                         <Input type="file" onChange={onChangePicture}></Input>
+                         <br />
+                         <Input type="file" onChange={onChangePicture} className="w-[100%]"></Input>
                          <img
                               className="playerProfilePic_home_tile"
                               src={picture && picture}

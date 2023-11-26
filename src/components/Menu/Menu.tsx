@@ -150,7 +150,7 @@ const Menu = ({
                          </Collapse>
                          <ListItemButton>
                               <ListItemText
-                                   primary="QUẢN LÝ SẢN PHẨM"
+                                   primary="TẤT CẢ SẢN PHẨM"
                                    onClick={() => {
                                         navigate("/order")
                                    }}

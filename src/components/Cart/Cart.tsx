@@ -70,18 +70,13 @@ const Cart = ({
           {/* Button to Checkout */}
           <Box className="
             flex
-            justify-between
+            justify-center
             items-center
-            w-full
+            w-[100%]
             mt-5
             ">
-            <Button variant="contained" className="ml-5 bg-black" onClick={() => {
-              navigate("/checkout");
-            }}>
-              Xem giỏ hàng
-            </Button>
             {/* Button to View Cart */}
-            <Button variant="contained" className="mr-5 bg-black" onClick={() => {
+            <Button variant="contained" className=" bg-black w-[90%]" onClick={() => {
               navigate("/checkout");
             }}>
               Thanh toán

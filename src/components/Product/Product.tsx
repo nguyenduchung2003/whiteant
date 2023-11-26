@@ -33,7 +33,7 @@ const arrayNewProduct: arrayNewProduct[] = [
 const Product = () => {
      return (
           <>
-               <Box className="flex w-[100%]">
+               <Box className="flex w-[100%]  cursor-pointer">
                     <img src={`${block_home_category1}`} className="w-[50%]" />
                     <img src={`${block_home_category2}`} className="w-[50%]" />
                </Box>

@@ -32,42 +32,41 @@ const FooterContent = () => {
                     </Typography>
                </Box>
                <Box className="mt-[50px]  " position="relative">
-                    <div className=" grid grid-cols-4 justify-between content-center  w-[1300px] h-[200px] border-y-4 m-auto border-[#16469e] font-bold">
-                         <div>
-                              GỌI MUA HÀNG (08:00 - 22:00) <br />
-                              09XXXXXXX <br />
-                              (NHÁNH 101) <br />
+                    <div className=" grid grid-cols-4 justify-between content-center  w-[1300px] h-[200px] border-y-4 m-auto border-[#16469e]">
+                         <div >
+                              <strong>GỌI MUA HÀNG (08:00 - 22:00)</strong> <br />
+                              <strong className="text-[30px]">091231231 </strong><br />
+                              <strong className="text-[30px]">(NHÁNH 101) </strong><br />
                               <span>Tất cả các ngày trong tuần</span>
                          </div>
                          <div>
-                              GỌI MUA HÀNG (08:00 - 22:00) <br />
-                              09XXXXXXX <br />
-                              (NHÁNH 102) <br />
+                         <strong>GỌI MUA HÀNG (08:00 - 22:00)</strong> <br />
+                              <strong className="text-[30px]">0901010101 </strong><br />
+                              <strong className="text-[30px]">(NHÁNH 102) </strong><br />
                               <span>Tất cả các ngày trong tuần</span>
                          </div>
                          <div>
-                              ĐĂNG KÍ NHẬN THÔNG TIN
+                             <strong> ĐĂNG KÍ NHẬN THÔNG TIN</strong>
                               <br />
                               <div className="flex w-[100%]  content-center">
                                    <form action="" className="h-[40px]">
                                         <input
                                              type="text"
                                              name="email"
-                                             className="p-[10px] border-2 border-grey w-4/6 "
+                                             className="h-[40px] p-[10px] border-[1px] border-grey w-4/6 "
                                              placeholder="Nhập email của bạn"
-                                             autoComplete="off"
                                         />
                                         <input
                                              type="button"
                                              name="btn"
-                                             value="Đăng kí"
-                                             className="h-[40px] w-2/6 border-1 bg-black text-white"
+                                             value="ĐĂNG KÍ"
+                                             className="h-[40px] w-2/6 border-1 bg-black text-white cursor-pointer font-regular"
                                         />
                                    </form>
                               </div>
                          </div>
                          <div>
-                              LIKE CHÚNG TÔI QUA MẠNG XÃ HỘI <br />
+                             <strong> LIKE CHÚNG TÔI QUA MẠNG XÃ HỘI </strong><br />
                               <div className="flex space-x-6 justify-center">
                                    <FontAwesomeIcon
                                         icon={faFacebook}
@@ -134,6 +133,7 @@ const FooterContent = () => {
                                         alt=""
                                         className="h-[400px] object-cover"
                                    />
+                                   Xem địa chỉ Showroom &#62;
                               </div>
                          </div>
                          <div className="flex bg-[#a1a1a1] h-[106px] justify-center">

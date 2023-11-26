@@ -28,7 +28,7 @@ const Information = () => {
                               <Typography>
                                    <strong>
                                         Công ty CP Kiến Trắng (whiteant-jsc):
-                                        Thời trang White Ant{" "}
+                                        Thời trang PETILLANT{" "}
                                    </strong>
                                    &nbsp;định vị mình là Local Brand thương hiệu
                                    thời trang thiết kế cận cao cấp. Được thành
@@ -41,7 +41,7 @@ const Information = () => {
                                    lượng&nbsp;và dịch vụ mang tầm quốc tế.&nbsp;
                               </Typography>
                               <Typography>
-                                   <strong>WHITE ANT</strong>&nbsp;xây dựng
+                                   <strong>PETILLANT</strong>&nbsp;xây dựng
                                    thương hiệu bằng chất lượng sản phẩm, đó sẽ
                                    là công cụ marketing và chữ tín tốt nhất cho
                                    nhãn hàng, ngoài ra gắn liền với văn hóa
@@ -60,7 +60,7 @@ const Information = () => {
                                    “mang lại sự tự tin cho Khách hàng” - " More
                                    Younger, More Confident"&nbsp; luôn tôn vinh
                                    vẻ đẹp và sự quyến rũ của người phụ nữ,&nbsp;
-                                   <strong>WHITE ANT</strong>&nbsp;luôn nỗ lực
+                                   <strong>PETILLANT</strong>&nbsp;luôn nỗ lực
                                    làm việc hết mình vì sự vẻ đẹp và sự hài lòng
                                    cho khách hàng.
                               </Typography>
@@ -70,10 +70,10 @@ const Information = () => {
                                    doanh nhân, các nữ nhân viên văn phòng, công
                                    chức và những người phụ nữ hiện đại thành đạt
                                    là thế mạnh lớn nhất của&nbsp;
-                                   <strong>WHITE ANT.</strong>
+                                   <strong>PETILLANT.</strong>
                                    &nbsp;Với kiểu dáng và chất liệu mềm mại, có
                                    nguồn gốc tự nhiên,&nbsp;
-                                   <strong>WHITE ANT&nbsp;</strong>sẽ làm cho
+                                   <strong>PETILLANT&nbsp;</strong>sẽ làm cho
                                    bạn&nbsp;cảm thấy trang phục công sở không
                                    còn là sự cứng nhắc, gò bó mà thực sự trở
                                    thành một nguồn vui, niềm hứng khởi cho mỗi
@@ -83,11 +83,11 @@ const Information = () => {
                               </Typography>
                               <Typography>
                                    Tự tin với sản phẩm của chính mình,&nbsp;
-                                   <strong>WHITE ANT</strong>&nbsp;không ngừng
+                                   <strong>PETILLANT</strong>&nbsp;không ngừng
                                    lắng nghe, sáng tạo để đáp ứng tối đa nhu cầu
                                    của quý khách hàng. Xin chân thành cảm ơn mọi
                                    sự đóng góp và ủng hộ của quý khách hàng đã
-                                   dành cho <strong>WHITE ANT</strong>
+                                   dành cho <strong>PETILLANT</strong>
                                    &nbsp;trong suốt thời gian qua và cả trong
                                    tương lai.
                               </Typography>
@@ -122,11 +122,6 @@ const Information = () => {
                                         </Typography>
                                    </li>
                               </ul>
-                              <Typography>
-                                   <strong>
-                                        Công ty CP Kiến Trắng (White Ant-JSC)
-                                   </strong>
-                              </Typography>
                          </Box>
                     </Box>
                </Box>

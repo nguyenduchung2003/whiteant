@@ -207,12 +207,12 @@ const CheckOut = () => {
                                         onChange={handleChangeShip}
                                    >
                                         <FormControlLabel
-                                             value="ghtk"
+                                             value="Ship"
                                              control={<Radio />}
                                              label="Giao hàng tận nơi, Freeship với đơn hàng trên 1.000.000"
                                         />
                                         <FormControlLabel
-                                             value="denshop"
+                                             value="Shop"
                                              control={<Radio />}
                                              label="Đến trực tiếp cửa hàng"
                                         />
@@ -226,12 +226,12 @@ const CheckOut = () => {
                                         onChange={handleChangePayment}
                                    >
                                         <FormControlLabel
-                                             value="tienmat"
+                                             value="COD"
                                              control={<Radio />}
                                              label="Thanh toán khi giao hàng (COD)"
                                         />
                                         <FormControlLabel
-                                             value="chuyenkhoan"
+                                             value="CHUYENKHOAN"
                                              control={<Radio />}
                                              label="Chuyển khoản qua ngân hàng"
                                         />

@@ -20,6 +20,7 @@ function HomePage() {
           setOpenMenu(false)
      }
      return (
+
           <>
                <HeadSideBar
                     ClickOpenMenu={ClickOpenMenu}
