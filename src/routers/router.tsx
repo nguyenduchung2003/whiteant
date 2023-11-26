@@ -11,7 +11,7 @@ const router = createBrowserRouter([
           element: <App />,
      },
      {
-          path: "/whiteant//register",
+          path: "/whiteant/register",
           element: <Register />,
      },
      {
