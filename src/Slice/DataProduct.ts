@@ -50,7 +50,7 @@ export const slice = createSlice({
                return state.filter((item) => item.id != action.payload)
           },
           updateItemProduct: (state, action) => {
-               state.map((item) => {
+               return state.map((item) => {
                     if (item.id == action.payload.id) {
                          return {
                               ...item,
