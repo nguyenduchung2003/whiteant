@@ -7,7 +7,7 @@ import {
      TextField,
 } from "@mui/material"
 import allProduct from "../../Image/allProduct.webp"
-import dataProduct from "./dataProduct"
+// import dataProduct from "./dataProduct"
 
 import {
      //  useEffect,
@@ -54,7 +54,7 @@ const UpdateProduct = () => {
      }
      const handleAgreeAdd = () => {
           const newData = {
-               id: dataProduct.length + 1,
+               id: selectProduct.length + 1,
                pathImg: picture,
                name: listName,
                price: listDescription,
