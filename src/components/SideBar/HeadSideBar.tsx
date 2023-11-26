@@ -16,7 +16,7 @@ const HeadSideBar = ({
           <>
                <Box className="flex justify-around h-[110px] gap-[900px] relative z-[10] bg-white">
                     <Box className="flex gap-4 justify-center items-center w-[300px]">
-                         <Link to="/">
+                         <Link to="/whiteant/">
                               <img src={logo2} alt="" />
                          </Link>
                     </Box>
