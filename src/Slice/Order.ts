@@ -35,26 +35,44 @@ export const slice = createSlice({
                }
           },
           deleteItem: (state, action) => {
-               // return state.arrayOrderProduct.filter(
-               //      (item) => item.id != action.payload
-               // )
+               const dataLocal: userType[] = JSON.parse(
+                    localStorage.getItem("userss") as string
+               )
+               const x = dataLocal.filter((user) => user.status == true)
+               const userNow = Object.assign({}, x)[0]
                return {
                     ...state,
                     arrayOrderProduct: state.arrayOrderProduct.filter(
-                         (item) => item.id !== action.payload
+                         (item) => {
+                              if (item.emailNow == userNow.userName) {
+                                   return item.id !== action.payload
+                              }
+                              return true
+                         }
                     ),
                }
           },
           updateItem: (state, action) => {
+               const dataLocal: userType[] = JSON.parse(
+                    localStorage.getItem("userss") as string
+               )
+               const x = dataLocal.filter((user) => user.status == true)
+               const userNow = Object.assign({}, x)[0]
                if (action.payload.type == "tang") {
                     state.arrayOrderProduct.forEach((item) => {
-                         if (item.id == action.payload.id) {
+                         if (
+                              item.id == action.payload.id &&
+                              item.emailNow == userNow.userName
+                         ) {
                               item.quantity++
                          }
                     })
                } else {
                     state.arrayOrderProduct.forEach((item) => {
-                         if (item.id == action.payload.id) {
+                         if (
+                              item.id == action.payload.id &&
+                              item.emailNow == userNow.userName
+                         ) {
                               item.quantity--
                          }
                     })
