@@ -23,9 +23,13 @@ export const slice = createSlice({
                               item.emailNow == action.payload.emailNow
                     )
                ) {
-                    state.arrayOrderProduct.forEach(
-                         (item) => (item.quantity += action?.payload.quantity)
-                    )
+                    state.arrayOrderProduct.forEach((item) => {
+                         if (
+                              item.id == action?.payload.id &&
+                              item.emailNow == action.payload.emailNow
+                         )
+                              item.quantity += action?.payload.quantity
+                    })
                } else {
                     state.arrayOrderProduct.push(action?.payload)
                }
