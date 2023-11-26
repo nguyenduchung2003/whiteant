@@ -1,9 +1,12 @@
 import { Box, Button, Typography, Input, IconButton } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
-import AddIcon from "@mui/icons-material/Add"
-import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule"
+// import AddIcon from "@mui/icons-material/Add"
+// import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule"
 
-import { useAppSelector, useAppDispatch } from "../../hook"
+import {
+     //  useAppSelector,
+     useAppDispatch,
+} from "../../hook"
 import { deleteItem, updateItem } from "../../Slice/Order"
 
 interface Props {
@@ -11,9 +14,9 @@ interface Props {
 }
 
 const ProductFameListCart = ({ arrayDataProduct }: Props) => {
-     const selectOrder = useAppSelector(
-          (state) => state.order.arrayOrderProduct
-     )
+     // const selectOrder = useAppSelector(
+     //      (state) => state.order.arrayOrderProduct
+     // )
      const dispatch = useAppDispatch()
 
      const deleteProduct = async (id: number) => {

@@ -1,6 +1,6 @@
 import logo2 from "../../Image/logo.png"
 import { Box } from "@mui/material"
-import SearchIcon from "@mui/icons-material/Search"
+// import SearchIcon from "@mui/icons-material/Search"
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import { Link } from "react-router-dom"

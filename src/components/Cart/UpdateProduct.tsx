@@ -9,10 +9,16 @@ import {
 import allProduct from "../../Image/allProduct.webp"
 import dataProduct from "./dataProduct"
 
-import { useEffect, useState } from "react"
+import {
+     //  useEffect,
+     useState,
+} from "react"
 import DialogList from "./DialogList"
 import Menu from "../Menu"
-import { useAppSelector, useAppDispatch } from "../../hook"
+import {
+     // useAppSelector,
+     useAppDispatch,
+} from "../../hook"
 import { addItem } from "../../Slice/Order"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -21,9 +27,9 @@ import SearchIcon from "@mui/icons-material/Search"
 import FooterContent from "../Footer/FooterContent"
 const UpdateProduct = () => {
      const [textSearch, setTextSearch] = useState<string>("")
-     const selectOrder = useAppSelector(
-          (state) => state.order.arrayOrderProduct
-     )
+     // const selectOrder = useAppSelector(
+     //      (state) => state.order.arrayOrderProduct
+     // )
      const dispatch = useAppDispatch()
      const [updateList, setUpdateList] = useState<boolean>(false)
      const [open, setOpen] = useState(false)
@@ -44,7 +50,6 @@ const UpdateProduct = () => {
           setOpen(false)
      }
      const handleAgreeAdd = () => {
-          let id = dataProduct.length + 1
           const newData = {
                id: dataProduct.length + 1,
                pathImg: picture,

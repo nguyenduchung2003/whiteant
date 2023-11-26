@@ -1,8 +1,6 @@
-import block_home_category4 from "../../Image/block_home_category4.webp"
-import block_home_category5 from "../../Image/block_home_category5.webp"
 import block_home_category6 from "../../Image/block_home_category6.webp"
 import banner from "../../Image/banner_ft.webp"
-import Input from "@mui/material"
+
 import { Box, Typography } from "@mui/material"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
@@ -33,20 +31,34 @@ const FooterContent = () => {
                </Box>
                <Box className="mt-[50px]  " position="relative">
                     <div className=" grid grid-cols-4 justify-between content-center  w-[1300px] h-[200px] border-y-4 m-auto border-[#16469e]">
-                         <div >
-                              <strong>GỌI MUA HÀNG (08:00 - 22:00)</strong> <br />
-                              <strong className="text-[30px]">091231231 </strong><br />
-                              <strong className="text-[30px]">(NHÁNH 101) </strong><br />
+                         <div>
+                              <strong>GỌI MUA HÀNG (08:00 - 22:00)</strong>{" "}
+                              <br />
+                              <strong className="text-[30px]">
+                                   091231231{" "}
+                              </strong>
+                              <br />
+                              <strong className="text-[30px]">
+                                   (NHÁNH 101){" "}
+                              </strong>
+                              <br />
                               <span>Tất cả các ngày trong tuần</span>
                          </div>
                          <div>
-                         <strong>GỌI MUA HÀNG (08:00 - 22:00)</strong> <br />
-                              <strong className="text-[30px]">0901010101 </strong><br />
-                              <strong className="text-[30px]">(NHÁNH 102) </strong><br />
+                              <strong>GỌI MUA HÀNG (08:00 - 22:00)</strong>{" "}
+                              <br />
+                              <strong className="text-[30px]">
+                                   0901010101{" "}
+                              </strong>
+                              <br />
+                              <strong className="text-[30px]">
+                                   (NHÁNH 102){" "}
+                              </strong>
+                              <br />
                               <span>Tất cả các ngày trong tuần</span>
                          </div>
                          <div>
-                             <strong> ĐĂNG KÍ NHẬN THÔNG TIN</strong>
+                              <strong> ĐĂNG KÍ NHẬN THÔNG TIN</strong>
                               <br />
                               <div className="flex w-[100%]  content-center">
                                    <form action="" className="h-[40px]">
@@ -66,7 +78,8 @@ const FooterContent = () => {
                               </div>
                          </div>
                          <div>
-                             <strong> LIKE CHÚNG TÔI QUA MẠNG XÃ HỘI </strong><br />
+                              <strong> LIKE CHÚNG TÔI QUA MẠNG XÃ HỘI </strong>
+                              <br />
                               <div className="flex space-x-6 justify-center">
                                    <FontAwesomeIcon
                                         icon={faFacebook}

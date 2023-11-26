@@ -11,7 +11,7 @@ import {
 } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import SelectProvinces from "./SelectProvinces"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useAppSelector, useAppDispatch } from "../../hook"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
