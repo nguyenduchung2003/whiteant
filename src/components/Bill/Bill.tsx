@@ -10,19 +10,19 @@ import { useAppSelector } from "../../hook"
 import { useNavigate } from "react-router-dom"
 const Bill = () => {
      const selectOrder = useAppSelector((state) => state.order.arrayMyOrder)
+     console.log(selectOrder)
+     const dataLocal: userType[] = JSON.parse(
+          localStorage.getItem("userss") as string
+     )
+     const x = dataLocal.filter((user) => user.status == true)
+     const userNow = Object.assign({}, x)[0]
      const navigate = useNavigate()
      return (
           <>
                <h1 className="text-3xl font-bold m-5">HÓA ĐƠN</h1>
-               <Button variant="contained" className="bg-black m-5" onClick={() => navigate("/order")}>
-                    Quay lai
-               </Button>
-               <TableContainer component={Paper} className="ml-5">
-                    <Table
-                         sx={{ minWidth: 650 }}
-                         size="small"
-                         aria-label="a dense table"
-                    >
+
+               <TableContainer component={Paper}>
+                    <Table size="small" aria-label="a dense table">
                          <TableHead>
                               <TableRow>
                                    <TableCell>Tên</TableCell>
@@ -36,9 +36,11 @@ const Bill = () => {
                                    <TableCell align="right">
                                         Quận/huyện{" "}
                                    </TableCell>
-                                   <TableCell align="right">Phường/xã</TableCell>
                                    <TableCell align="right">
-                                       Số lượng sản phẩm
+                                        Phường/xã
+                                   </TableCell>
+                                   <TableCell align="right">
+                                        Số lượng sản phẩm
                                    </TableCell>
                                    <TableCell align="right">
                                         Phương thức thanh toán
@@ -52,52 +54,67 @@ const Bill = () => {
                               </TableRow>
                          </TableHead>
                          <TableBody>
-                              {selectOrder.map((row, index) => (
-                                   <TableRow
-                                        key={index}
-                                        sx={{
-                                             "&:last-child td, &:last-child th":
-                                             {
-                                                  border: 0,
-                                             },
-                                        }}
-                                   >
-                                        <TableCell align="right">
-                                             {row.name}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                             {row.numberPhone}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                             {row.address}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                             {row.nameProvince}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                             {row.nameDistrict}
-                                        </TableCell>
+                              {selectOrder
+                                   .filter((item) => {
+                                        console.log(item.emailNow)
+                                        console.log(userNow.userName)
+                                        return item.emailNow == userNow.userName
+                                   })
+                                   .map((row, index) => (
+                                        <TableRow
+                                             key={index}
+                                             sx={{
+                                                  "&:last-child td, &:last-child th":
+                                                       {
+                                                            border: 0,
+                                                       },
+                                             }}
+                                        >
+                                             <TableCell align="right">
+                                                  {row.name}
+                                             </TableCell>
+                                             <TableCell align="right">
+                                                  {row.numberPhone}
+                                             </TableCell>
+                                             <TableCell align="right">
+                                                  {row.address}
+                                             </TableCell>
+                                             <TableCell align="right">
+                                                  {row.nameProvince}
+                                             </TableCell>
+                                             <TableCell align="right">
+                                                  {row.nameDistrict}
+                                             </TableCell>
 
-                                        <TableCell align="right">
-                                             {row.nameWard}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                             {row.arrayOder ? row.arrayOder.length : 0}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                             {row.valuePayment}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                             {row.valueShip}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                             {row.totalAmount}
-                                        </TableCell>
-                                   </TableRow>
-                              ))}
+                                             <TableCell align="right">
+                                                  {row.nameWard}
+                                             </TableCell>
+                                             <TableCell align="right">
+                                                  {row.arrayOder
+                                                       ? row.arrayOder.length
+                                                       : 0}
+                                             </TableCell>
+                                             <TableCell align="right">
+                                                  {row.valuePayment}
+                                             </TableCell>
+                                             <TableCell align="right">
+                                                  {row.valueShip}
+                                             </TableCell>
+                                             <TableCell align="right">
+                                                  {row.totalAmount}
+                                             </TableCell>
+                                        </TableRow>
+                                   ))}
                          </TableBody>
                     </Table>
                </TableContainer>
+               <Button
+                    variant="contained"
+                    className="bg-black m-5"
+                    onClick={() => navigate("/order")}
+               >
+                    BACK
+               </Button>
           </>
      )
 }

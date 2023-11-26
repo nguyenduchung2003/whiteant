@@ -8,8 +8,6 @@ import {
      FormControlLabel,
      Radio,
      Button,
-     Divider,
-     Input,
 } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import SelectProvinces from "./SelectProvinces"
@@ -18,18 +16,30 @@ import { useAppSelector, useAppDispatch } from "../../hook"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { completeMyOrder } from "../../Slice/Order"
-import  logo  from "../../Image/logo.png"
+import logo from "../../Image/logo.png"
 const CheckOut = () => {
-     const selectOrder = useAppSelector(
-          (state) => state.order.arrayOrderProduct
+     const dataLocal: userType[] = JSON.parse(
+          localStorage.getItem("userss") as string
      )
+     const x = dataLocal.filter((user) => user.status == true)
+     const userNow = Object.assign({}, x)[0]
+
+     const selectOrder = useAppSelector((state) => {
+          const dataFilters = state.order.arrayOrderProduct
+
+          return userNow
+               ? dataFilters.filter(
+                      (item) => item.emailNow === userNow.userName
+                 )
+               : []
+     })
      const dispatch = useAppDispatch()
      const [nameProvince, setNameProvince] = useState<string>("")
      const [nameDistrict, setNameDistrict] = useState<string>("")
      const [nameWard, setNameWard] = useState<string>("")
      const navigate = useNavigate()
      const [name, setName] = useState<string>("")
-     const [email, setEmail] = useState<string>("")
+     const [email, setEmail] = useState<string>(userNow.userName)
      const [numberPhone, setNumberPhone] = useState<string>("")
      const [address, setAddress] = useState<string>("")
      const [valueShip, setValueShip] = useState("ghtk")
@@ -50,6 +60,8 @@ const CheckOut = () => {
      )
 
      const CompleteOrder = async () => {
+          const x = userLocal.filter((user) => user.status == true)
+          const user = Object.assign({}, x)[0]
           if (
                !name ||
                !email ||
@@ -95,6 +107,7 @@ const CheckOut = () => {
                     nameWard: nameWard,
                     arrayOder: selectOrder,
                     totalAmount: totalAmount,
+                    emailNow: user.userName,
                }
                toast.success("Dat hang thanh cong", {
                     position: "top-right",
@@ -114,31 +127,35 @@ const CheckOut = () => {
      const userLocal: userType[] = JSON.parse(
           localStorage.getItem("userss") as string
      )
-     useEffect(() => {
-          if (userLocal.some((user) => user.status == true)) {
-               const x = userLocal.filter((user) => user.status == true)
-               const user = Object.assign({}, x)[0]
-               console.log(user)
-               setEmail(user.userName)
-          }
-     }, [userLocal])
-     const formattedPrice = Number(
-          totalAmount
-     ).toLocaleString("vi-VN", {
+     // useEffect(() => {
+     //      if (userLocal.some((user) => user.status == true)) {
+     //           const x = userLocal.filter((user) => user.status == true)
+     //           const user = Object.assign({}, x)[0]
+     //           console.log(user)
+     //           setEmail()
+     //      }
+     // }, [userLocal])
+     const formattedPrice = Number(totalAmount).toLocaleString("vi-VN", {
           style: "currency",
           currency: "VND",
      })
      return (
-          
           <>
                <ToastContainer />
                <Box className="flex ml-10 h-[1000px]">
                     <Box className="w-[50%]">
-                         <Button onClick={() => navigate("/")}> <img className="w-[100px]" src={logo} alt="" /> </Button>
+                         <Button onClick={() => navigate("/")}>
+                              {" "}
+                              <img
+                                   className="w-[100px]"
+                                   src={logo}
+                                   alt=""
+                              />{" "}
+                         </Button>
                          <Box className="flex flex-col gap-10 w-[60%] ml-[300px] ">
                               <Box className="flex flex-col gap-2">
                                    <Typography variant="h5" className="mt-5">
-                                       Thông tin giao hàng
+                                        Thông tin giao hàng
                                    </Typography>
                                    <Box className="flex">
                                         {userLocal.some(
@@ -148,7 +165,7 @@ const CheckOut = () => {
                                         ) : (
                                              <>
                                                   <Typography>
-                                                       Ban da co tai khoan ?
+                                                       Bạn đã có tài khoản ?
                                                   </Typography>
                                                   <Typography
                                                        onClick={() =>
@@ -156,7 +173,7 @@ const CheckOut = () => {
                                                        }
                                                        className="text-cyan-500 cursor-pointer"
                                                   >
-                                                       Dang nhap
+                                                       Đăng nhập
                                                   </Typography>
                                              </>
                                         )}
@@ -243,7 +260,7 @@ const CheckOut = () => {
                                    onClick={CompleteOrder}
                                    className="bg-black"
                               >
-                                  Hoàn tất đơn hàng
+                                   Hoàn tất đơn hàng
                               </Button>
                          </Box>
                     </Box>
@@ -277,7 +294,10 @@ const CheckOut = () => {
                                                        )}
                                                   </Typography>
                                                   <Box className="flex">
-                                                       <Typography className="text-sm">SL:{ product.quantity}</Typography>
+                                                       <Typography className="text-sm">
+                                                            SL:
+                                                            {product.quantity}
+                                                       </Typography>
                                                   </Box>
                                              </Box>
                                         </Box>
@@ -285,10 +305,16 @@ const CheckOut = () => {
                               })}
                          </Box>
                          <hr className="mt-[20px] w-[38%] ml-10" />
-                         <Typography className="mt-[20px] ml-10">Tạm tính: {`${formattedPrice}`}</Typography>
-                         <Typography className="mt-[20px] ml-10">Phí vận chuyển: Free</Typography>
+                         <Typography className="mt-[20px] ml-10">
+                              Tạm tính: {`${formattedPrice}`}
+                         </Typography>
+                         <Typography className="mt-[20px] ml-10">
+                              Phí vận chuyển: Free
+                         </Typography>
                          <hr className="mt-[20px] w-[38%] ml-10" />
-                         <Typography className="mt-[20px] ml-10">Tổng cộng: {`${formattedPrice}`}</Typography>
+                         <Typography className="mt-[20px] ml-10">
+                              Tổng cộng: {`${formattedPrice}`}
+                         </Typography>
                     </Box>
                </Box>
           </>

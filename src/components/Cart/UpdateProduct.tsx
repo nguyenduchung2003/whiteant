@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Cart from "./Cart"
 import SearchIcon from "@mui/icons-material/Search"
+import FooterContent from "../Footer/FooterContent"
 const UpdateProduct = () => {
      const [textSearch, setTextSearch] = useState<string>("")
      const selectOrder = useAppSelector(
@@ -142,166 +143,172 @@ const UpdateProduct = () => {
 
      return (
           <>
-               <ToastContainer />
-               <HeadSideBar
-                    ClickOpenMenu={ClickOpenMenu}
-                    ClickOpenCart={ClickOpenCart}
-               />
-               {openMenu ? (
-                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                         <Menu setOpenMenu={setOpenMenu} />
-                    </Box>
-               ) : (
-                    ""
-               )}
-               {openCart ? (
-                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                         <Cart setOpenCart={setOpenCart} />
-                    </Box>
-               ) : (
-                    ""
-               )}
-               <hr />
-               <img
-                    src={`${allProduct}`}
-                    alt=""
-                    className="h-[650px] w-full object-cover"
-               />
-               {dataLocal?.some(
-                    (data: userType) =>
-                         data.userName == "admin@gmail.com" &&
-                         data.status == true
-               ) ? (
-                    <Button
-                         variant="outlined"
-                         onClick={clickAddProduct}
-                         className="my-[20px]"
-                    >
-                         Thêm sản phẩm
-                    </Button>
-               ) : (
-                    ""
-               )}
+               <Box className="relative">
+                    <ToastContainer />
+                    <HeadSideBar
+                         ClickOpenMenu={ClickOpenMenu}
+                         ClickOpenCart={ClickOpenCart}
+                    />
+                    {openMenu ? (
+                         <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
+                              <Menu setOpenMenu={setOpenMenu} />
+                         </Box>
+                    ) : (
+                         ""
+                    )}
+                    {openCart ? (
+                         <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
+                              <Cart setOpenCart={setOpenCart} />
+                         </Box>
+                    ) : (
+                         ""
+                    )}
+                    <hr />
+                    <img
+                         src={`${allProduct}`}
+                         alt=""
+                         className="h-[650px] w-full object-cover"
+                    />
+                    {dataLocal?.some(
+                         (data: userType) =>
+                              data.userName == "admin@gmail.com" &&
+                              data.status == true
+                    ) ? (
+                         <Button
+                              variant="outlined"
+                              onClick={clickAddProduct}
+                              className="my-[20px]  absolute left-10 "
+                         >
+                              Thêm sản phẩm
+                         </Button>
+                    ) : (
+                         ""
+                    )}
 
-               <TextField
-                    id="input-with-icon-textfield"
-                    label="Text Search"
-                    value={textSearch}
-                    onChange={(e) => setTextSearch(e.target.value)}
-                    InputProps={{
-                         startAdornment: (
-                              <InputAdornment position="start">
-                                   <SearchIcon />
-                              </InputAdornment>
-                         ),
-                    }}
-                    variant="filled"
-               />
-               <DialogList
-                    updateList={updateList}
-                    open={open}
-                    handleClose={handleClose}
-                    listName={listName}
-                    listDescription={listDescription}
-                    setListName={setListName}
-                    setListDescription={setListDescription}
-                    handleAgreeAdd={handleAgreeAdd}
-                    handleAgreeUpdate={handleAgreeUpdate}
-                    setPicture={setPicture}
-                    picture={picture}
-               ></DialogList>
+                    <TextField
+                         id="input-with-icon-textfield"
+                         label="Text Search"
+                         value={textSearch}
+                         onChange={(e) => setTextSearch(e.target.value)}
+                         InputProps={{
+                              startAdornment: (
+                                   <InputAdornment position="start">
+                                        <SearchIcon />
+                                   </InputAdornment>
+                              ),
+                         }}
+                         variant="filled"
+                         className="my-[20px] w-[500px] absolute right-[35px] "
+                    />
+                    <DialogList
+                         updateList={updateList}
+                         open={open}
+                         handleClose={handleClose}
+                         listName={listName}
+                         listDescription={listDescription}
+                         setListName={setListName}
+                         setListDescription={setListDescription}
+                         handleAgreeAdd={handleAgreeAdd}
+                         handleAgreeUpdate={handleAgreeUpdate}
+                         setPicture={setPicture}
+                         picture={picture}
+                    ></DialogList>
 
-               <Box className="flex gap-5 justify-center flex-wrap">
-                    {data
-                         .filter((item) => {
-                              if (textSearch == "") {
-                                   return item
-                              } else if (
-                                   item.name
-                                        .toLowerCase()
-                                        .includes(textSearch.toLowerCase())
-                              ) {
-                                   return item
-                              }
-                         })
-                         .map((product, index) => {
-                              const formattedPrice = Number(
-                                   product.price
-                              ).toLocaleString("vi-VN", {
-                                   style: "currency",
-                                   currency: "VND",
+                    <Box className="flex gap-5 justify-center flex-wrap mt-[100px]">
+                         {data
+                              .filter((item) => {
+                                   if (textSearch == "") {
+                                        return item
+                                   } else if (
+                                        item.name
+                                             .toLowerCase()
+                                             .includes(textSearch.toLowerCase())
+                                   ) {
+                                        return item
+                                   }
                               })
-                              return (
-                                   <Box
-                                        key={index}
-                                        className="flex flex-col gap-5 group/item relative"
-                                   >
-                                        <img
-                                             src={`${product.pathImg}`}
-                                             alt=""
-                                             className="w-[348px] h-[522px] "
-                                        />
-                                        <Typography
-                                             onClick={() =>
-                                                  handlerAddItemOrder(
-                                                       product.id as number,
-                                                       product.pathImg,
-                                                       product.name,
-                                                       product.price
-                                                  )
-                                             }
-                                             className="absolute invisible  top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center  group-hover/item:visible"
+                              .map((product, index) => {
+                                   const formattedPrice = Number(
+                                        product.price
+                                   ).toLocaleString("vi-VN", {
+                                        style: "currency",
+                                        currency: "VND",
+                                   })
+                                   return (
+                                        <Box
+                                             key={index}
+                                             className="flex flex-col gap-5 group/item relative"
                                         >
-                                             MUA NGAY &rarr;
-                                        </Typography>
-                                        <Box className="w-[340px] flex flex-col gap-3">
-                                             <Typography className="truncate">
-                                                  Tên sản phẩm: {product.name}
+                                             <img
+                                                  src={`${product.pathImg}`}
+                                                  alt=""
+                                                  className="w-[348px] h-[522px] "
+                                             />
+                                             <Typography
+                                                  onClick={() =>
+                                                       handlerAddItemOrder(
+                                                            product.id as number,
+                                                            product.pathImg,
+                                                            product.name,
+                                                            product.price
+                                                       )
+                                                  }
+                                                  className="absolute invisible  top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center  group-hover/item:visible"
+                                             >
+                                                  MUA NGAY &rarr;
                                              </Typography>
-                                             <Box>
-                                                  <Typography className="">
-                                                       Giá sản phẩm:{" "}
-                                                       {formattedPrice}
+                                             <Box className="w-[340px] flex flex-col gap-3">
+                                                  <Typography className="truncate">
+                                                       Tên sản phẩm:{" "}
+                                                       {product.name}
                                                   </Typography>
-                                                  {dataLocal?.some(
-                                                       (data: userType) =>
-                                                            data.userName ==
-                                                                 "admin@gmail.com" &&
-                                                            data.status == true
-                                                  ) ? (
-                                                       <Box className="flex justify-between">
-                                                            <Button
-                                                                 variant="outlined"
-                                                                 onClick={() =>
-                                                                      updateItem(
-                                                                           product.id as number,
-                                                                           product.name,
-                                                                           product.price,
-                                                                           product.pathImg
-                                                                      )
-                                                                 }
-                                                            >
-                                                                 Update
-                                                            </Button>
-                                                            <Button
-                                                                 variant="outlined"
-                                                                 onClick={() =>
-                                                                      deleteItem(
-                                                                           product.id as number
-                                                                      )
-                                                                 }
-                                                            >
-                                                                 Xóa
-                                                            </Button>
-                                                       </Box>
-                                                  ) : (
-                                                       ""
-                                                  )}
+                                                  <Box>
+                                                       <Typography className="">
+                                                            Giá sản phẩm:{" "}
+                                                            {formattedPrice}
+                                                       </Typography>
+                                                       {dataLocal?.some(
+                                                            (data: userType) =>
+                                                                 data.userName ==
+                                                                      "admin@gmail.com" &&
+                                                                 data.status ==
+                                                                      true
+                                                       ) ? (
+                                                            <Box className="flex justify-between">
+                                                                 <Button
+                                                                      variant="outlined"
+                                                                      onClick={() =>
+                                                                           updateItem(
+                                                                                product.id as number,
+                                                                                product.name,
+                                                                                product.price,
+                                                                                product.pathImg
+                                                                           )
+                                                                      }
+                                                                 >
+                                                                      Update
+                                                                 </Button>
+                                                                 <Button
+                                                                      variant="outlined"
+                                                                      onClick={() =>
+                                                                           deleteItem(
+                                                                                product.id as number
+                                                                           )
+                                                                      }
+                                                                 >
+                                                                      Xóa
+                                                                 </Button>
+                                                            </Box>
+                                                       ) : (
+                                                            ""
+                                                       )}
+                                                  </Box>
                                              </Box>
                                         </Box>
-                                   </Box>
-                              )
-                         })}
+                                   )
+                              })}
+                    </Box>
+                    <FooterContent></FooterContent>
                </Box>
           </>
      )

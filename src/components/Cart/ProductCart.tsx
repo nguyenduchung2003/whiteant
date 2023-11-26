@@ -15,7 +15,7 @@ const ProductCart = () => {
      const selectOrder = useAppSelector(
           (state) => state.order.arrayOrderProduct
      )
-     const dispatch = useAppDispatch()
+
      const dataLocal: userType[] = JSON.parse(
           localStorage.getItem("userss") as string
      )
