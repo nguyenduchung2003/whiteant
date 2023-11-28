@@ -193,7 +193,7 @@ const UpdateProduct = () => {
                quantity: 1,
                emailNow: userNow?.userName,
           }
-          console.log(1)
+
           if (userNow) {
                await dispatch(addItem(newItem))
                toast.success("Thêm vào giỏ hàng thành công", {
@@ -207,7 +207,19 @@ const UpdateProduct = () => {
                     theme: "light",
                })
           } else {
-               navigator("/whiteAnt/login")
+               toast.warning("Bạn cần phải đăng nhập trước", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+               })
+               setTimeout(() => {
+                    navigator("/whiteAnt/login")
+               }, 3000)
           }
      }
 
