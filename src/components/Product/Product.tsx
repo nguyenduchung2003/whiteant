@@ -12,19 +12,21 @@ const arrayNewProduct: arrayNewProduct[] = [
           pathImg: newProduct1,
           name: "Đầm Trễ Vai Phối Nữ White Ant DEMPSEY OF THE SHOULDER DRESS 120900002.100",
           price: "2,485,000₫",
+          
      },
      {
           pathImg: newProduct2,
           name: "Đầm Suông Trễ Vai Nữ White Ant LYNNE OFF THE SHOULDER DRESS 120900001",
           price: "2,985,000₫",
+          
      },
      {
           pathImg: newProduct3,
           name: "Chân Váy A Dáng Dài Nữ White Ant ADELA MAXI SKIRT 110900006",
-          price: "1,485,000₫",
+          price: "1,485,000₫",  
      },
      {
-          pathImg: newProduct4,
+          pathImg:newProduct4,
           name: "Đầm Trễ Vai Phối Nữ White Ant DEMPSEY OF THE SHOULDER DRESS 120900002.002",
           price: "2,485,000₫",
      },

@@ -196,7 +196,7 @@ const UpdateProduct = () => {
 
           if (userNow) {
                // await dispatch(addItem(newItem))
-               navigator(`/whiteAnt/order/${id}`)
+               navigator(`/whiteant/order/${id}`)
                toast.success("Thêm vào giỏ hàng thành công", {
                     position: "top-right",
                     autoClose: 3000,
@@ -219,7 +219,7 @@ const UpdateProduct = () => {
                     theme: "light",
                })
                setTimeout(() => {
-                    navigator("/whiteAnt/login")
+                    navigator("/whitent/login")
                }, 3000)
           }
      }

@@ -1,13 +1,14 @@
 declare global {
+     
      interface arrayNewProduct {
           id?: number
           pathImg: string
           name: string
           price: string
-          size: string[]
-          quantity: number
-          material: string
-          describe: string
+          size?: string[]
+          quantity?: number
+          material?: string
+          describe?: string
      }
      interface userType {
           userName: string
