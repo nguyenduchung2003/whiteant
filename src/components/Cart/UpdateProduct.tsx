@@ -30,6 +30,7 @@ import {
      updateItemProduct,
      deleteItemProduct,
 } from "../../Slice/DataProduct"
+import { useNavigate } from "react-router-dom"
 const UpdateProduct = () => {
      const [textSearch, setTextSearch] = useState<string>("")
      const selectProduct = useAppSelector((state) => state.dataProduct)
@@ -53,19 +54,47 @@ const UpdateProduct = () => {
           setOpen(false)
      }
      const handleAgreeAdd = () => {
-          const newData = {
-               id: selectProduct.length + 1,
-               pathImg: picture,
-               name: listName,
-               price: listDescription,
+          if (!listName || listName.length > 255) {
+               toast.warning("Tên sản phẩm không hợp lệ", {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+               })
+          } else if (
+               !listDescription ||
+               Number(listDescription) <= 0 ||
+               !Number(listDescription)
+          ) {
+               toast.warning("Giá không hợp lệ", {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+               })
+          } else {
+               const newData = {
+                    id: selectProduct.length + 1,
+                    pathImg: picture,
+                    name: listName,
+                    price: listDescription,
+               }
+               // console.log(imgData)
+               // const x = [...data]
+               // x.push(newData)
+               // setData(x)
+               dispatch(addItemProduct(newData))
+               setUpdateList(false)
+               setOpen(false)
           }
-          // console.log(imgData)
-          // const x = [...data]
-          // x.push(newData)
-          // setData(x)
-          dispatch(addItemProduct(newData))
-          setUpdateList(false)
-          setOpen(false)
      }
      const deleteItem = (id: number) => {
           console.log(id)
@@ -100,23 +129,51 @@ const UpdateProduct = () => {
           //           }
           //      } else return item
           // })
-          const dataUpdate = {
-               id: idUpdate,
-               pathImg: picture,
-               name: listName,
-               price: listDescription,
-          }
-          dispatch(updateItemProduct(dataUpdate))
+          if (!listName || listName.length > 255) {
+               toast.warning("Tên sản phẩm không hợp lệ", {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+               })
+          } else if (
+               !listDescription ||
+               Number(listDescription) <= 0 ||
+               !Number(listDescription)
+          ) {
+               toast.warning("Giá không hợp lệ", {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+               })
+          } else {
+               const dataUpdate = {
+                    id: idUpdate,
+                    pathImg: picture,
+                    name: listName,
+                    price: listDescription,
+               }
+               dispatch(updateItemProduct(dataUpdate))
 
-          // setData(x)
-          setUpdateList(false)
-          setOpen(false)
+               // setData(x)
+               setUpdateList(false)
+               setOpen(false)
+          }
      }
      const [openMenu, setOpenMenu] = useState<boolean>(false)
      const ClickOpenMenu = () => {
           setOpenMenu(true)
      }
-
+     const navigator = useNavigate()
      const handlerAddItemOrder = async (
           id: number,
           path: string,
@@ -134,19 +191,24 @@ const UpdateProduct = () => {
                name: name,
                price: price,
                quantity: 1,
-               emailNow: userNow.userName,
+               emailNow: userNow?.userName,
           }
-          await dispatch(addItem(newItem))
-          toast.success("Thêm vào giỏ hàng thành công", {
-               position: "top-right",
-               autoClose: 3000,
-               hideProgressBar: false,
-               closeOnClick: true,
-               pauseOnHover: true,
-               draggable: true,
-               progress: undefined,
-               theme: "light",
-          })
+          console.log(1)
+          if (userNow) {
+               await dispatch(addItem(newItem))
+               toast.success("Thêm vào giỏ hàng thành công", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+               })
+          } else {
+               navigator("/whiteAnt/login")
+          }
      }
 
      const [openCart, setOpenCart] = useState<boolean>(false) // New state for cart visibility
