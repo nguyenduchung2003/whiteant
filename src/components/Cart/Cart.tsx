@@ -4,7 +4,6 @@ import List from "@mui/material/List"
 
 import ProductCart from "../Cart/ProductCart"
 
-// import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
 const Cart = ({

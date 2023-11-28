@@ -90,6 +90,7 @@ export const slice = createSlice({
                          item.id == action.payload.id &&
                          item.emailNow == userNow.userName
                     ) {
+                         console.log(action.payload.size)
                          item.size = action.payload.size
                     }
                })

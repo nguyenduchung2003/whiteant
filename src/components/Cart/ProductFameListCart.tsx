@@ -11,7 +11,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete"
 // import AddIcon from "@mui/icons-material/Add"
 // import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppSelector, useAppDispatch } from "../../hook"
 import { deleteItem, updateItem, updateItemSize } from "../../Slice/Order"
 import { ToastContainer, toast } from "react-toastify"
@@ -23,7 +23,6 @@ interface Props {
 const ProductFameListCart = ({ arrayDataProduct }: Props) => {
      const arrayData = useAppSelector((state) => state.dataProduct)
      const dispatch = useAppDispatch()
-     // const [selectedSize, setSelectedSize] = useState<string>("")
 
      const deleteProduct = async (id: number) => {
           await dispatch(deleteItem(id || 0))
@@ -54,22 +53,39 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
      const data = arrayData.filter((item) =>
           arrayDataProduct.some((itemO) => itemO.id == item.id)
      )
-     console.log(data)
-     console.log(arrayDataProduct)
-     const [checkedValues, setCheckedValues] = useState<string[]>([])
+
+     const [checkedValues, setCheckedValues] = useState<{
+          [key: number]: string[]
+     }>({})
+
      const handleCheckboxChange = (value: string, id: number) => {
-          if (checkedValues.includes(value)) {
-               setCheckedValues(checkedValues.filter((v) => v !== value))
-          } else {
-               setCheckedValues([...checkedValues, value])
-          }
-          dispatch(
-               updateItemSize({
-                    id: id,
-                    size: checkedValues,
-               })
-          )
+          setCheckedValues((prevValues) => {
+               const currentSizes = prevValues[id] || []
+
+               if (currentSizes.includes(value)) {
+                    return {
+                         ...prevValues,
+                         [id]: currentSizes.filter((v) => v !== value),
+                    }
+               } else {
+                    return {
+                         ...prevValues,
+                         [id]: [...currentSizes, value],
+                    }
+               }
+          })
      }
+     useEffect(() => {
+          Object.keys(checkedValues).forEach((id) => {
+               dispatch(
+                    updateItemSize({
+                         id: parseInt(id),
+                         size: checkedValues[parseInt(id)],
+                    })
+               )
+          })
+     }, [checkedValues, dispatch])
+
      return (
           <>
                <ToastContainer />
@@ -123,7 +139,7 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
                                                        onChange={() =>
                                                             handleCheckboxChange(
                                                                  "S",
-                                                                 product.id as number
+                                                                 product?.id as number
                                                             )
                                                        }
                                                   />
@@ -147,7 +163,7 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
                                                        onChange={() =>
                                                             handleCheckboxChange(
                                                                  "M",
-                                                                 product.id as number
+                                                                 product?.id as number
                                                             )
                                                        }
                                                   />
@@ -171,7 +187,7 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
                                                        onChange={() =>
                                                             handleCheckboxChange(
                                                                  "L",
-                                                                 product.id as number
+                                                                 product?.id as number
                                                             )
                                                        }
                                                   />

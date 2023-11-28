@@ -10,6 +10,7 @@ import ProductFameListCart from "./ProductFameListCart"
 // import { useEffect, useState } from "react"
 import { useAppSelector } from "../../hook"
 // import { addItem } from "../../Slice/Order"
+// import {useState} from "react"
 
 const ProductCart = () => {
      const selectOrder = useAppSelector(
@@ -19,6 +20,7 @@ const ProductCart = () => {
      const dataLocal: userType[] = JSON.parse(
           localStorage.getItem("userss") as string
      )
+     // const [checkedValues, setCheckedValues] = useState<string[]>([])
      const x = dataLocal.filter((user) => user.status == true)
      const userNow = Object.assign({}, x)[0]
      return (
