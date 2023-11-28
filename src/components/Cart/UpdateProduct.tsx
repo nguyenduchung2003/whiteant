@@ -36,8 +36,9 @@ const UpdateProduct = () => {
      const selectProduct = useAppSelector((state) => state.dataProduct)
      const dispatch = useAppDispatch()
      const [updateList, setUpdateList] = useState<boolean>(false)
-     const [open, setOpen] = useState(false)
-     const [listName, setListName] = useState("")
+     const [open, setOpen] = useState<boolean>(false)
+     const [listName, setListName] = useState<string>("")
+     const [quantity, setQuantity] = useState<number>(0)
 
      // const [imgData, setImgData] = useState("")
      const [listDescription, setListDescription] = useState("")
@@ -80,12 +81,24 @@ const UpdateProduct = () => {
                     progress: undefined,
                     theme: "light",
                })
+          } else if (!quantity || Number(quantity) <= 0 || !Number(quantity)) {
+               toast.warning("Số lượng không hợp lệ", {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+               })
           } else {
                const newData = {
                     id: selectProduct.length + 1,
                     pathImg: picture,
                     name: listName,
                     price: listDescription,
+                    quantity: quantity,
                }
                // console.log(imgData)
                // const x = [...data]
@@ -155,12 +168,24 @@ const UpdateProduct = () => {
                     progress: undefined,
                     theme: "light",
                })
+          } else if (!quantity || Number(quantity) <= 0 || !Number(quantity)) {
+               toast.warning("Số lượng không hợp lệ", {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+               })
           } else {
                const dataUpdate = {
                     id: idUpdate,
                     pathImg: picture,
                     name: listName,
                     price: listDescription,
+                    quantity: quantity,
                }
                dispatch(updateItemProduct(dataUpdate))
 
@@ -304,6 +329,8 @@ const UpdateProduct = () => {
                          handleAgreeUpdate={handleAgreeUpdate}
                          setPicture={setPicture}
                          picture={picture}
+                         quantity={quantity}
+                         setQuantity={setQuantity}
                     ></DialogList>
 
                     <Box className="flex gap-5 justify-center flex-wrap mt-[100px]">
@@ -354,11 +381,15 @@ const UpdateProduct = () => {
                                                        Tên sản phẩm:{" "}
                                                        {product.name}
                                                   </Typography>
+                                                  <Typography className="truncate">
+                                                       Số lượng sản phẩm:{" "}
+                                                       {product.quantity}
+                                                  </Typography>
+                                                  <Typography className="">
+                                                       Giá sản phẩm:{" "}
+                                                       {formattedPrice}
+                                                  </Typography>
                                                   <Box>
-                                                       <Typography className="">
-                                                            Giá sản phẩm:{" "}
-                                                            {formattedPrice}
-                                                       </Typography>
                                                        {dataLocal?.some(
                                                             (data: userType) =>
                                                                  data.userName ==

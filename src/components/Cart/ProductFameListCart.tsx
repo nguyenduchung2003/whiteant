@@ -2,22 +2,19 @@ import { Box, Button, Typography, Input, IconButton } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 // import AddIcon from "@mui/icons-material/Add"
 // import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule"
-
-import {
-     //  useAppSelector,
-     useAppDispatch,
-} from "../../hook"
-import { deleteItem, updateItem } from "../../Slice/Order"
-
+// import { useState } from "react"
+import { useAppSelector, useAppDispatch } from "../../hook"
+import { deleteItem, updateItem, updateItemSize } from "../../Slice/Order"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 interface Props {
      arrayDataProduct: arrayOrderProduct[]
 }
 
 const ProductFameListCart = ({ arrayDataProduct }: Props) => {
-     // const selectOrder = useAppSelector(
-     //      (state) => state.order.arrayOrderProduct
-     // )
+     const arrayData = useAppSelector((state) => state.dataProduct)
      const dispatch = useAppDispatch()
+     // const [selectedSize, setSelectedSize] = useState<string>("")
 
      const deleteProduct = async (id: number) => {
           await dispatch(deleteItem(id || 0))
@@ -45,9 +42,14 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
                total + product.quantity * (product.price as unknown as number),
           0
      )
-
+     const data = arrayData.filter((item) =>
+          arrayDataProduct.some((itemO) => itemO.id == item.id)
+     )
+     console.log(data)
+     console.log(arrayDataProduct)
      return (
           <>
+               <ToastContainer />
                <Box className="flex flex-col gap-5 ml-5">
                     {arrayDataProduct?.map((product, index) => {
                          return (
@@ -72,15 +74,127 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
                                                   product.price as unknown as number
                                              )}
                                         </Typography>
+                                        <Box className="flex content-center">
+                                             <Typography className="h-[50px]">
+                                                  Chọn size
+                                             </Typography>
+
+                                             <ul className="grid w-[50%] gap-6 md:grid-cols-3 ">
+                                                  <li>
+                                                       <button
+                                                            onClick={() => {
+                                                                 // setSelectedSize(
+                                                                 //      "S"
+                                                                 // )
+                                                                 dispatch(
+                                                                      updateItemSize(
+                                                                           {
+                                                                                id: product.id,
+                                                                                size: "S",
+                                                                           }
+                                                                      )
+                                                                 )
+                                                            }}
+                                                            className={`${
+                                                                 product.size ==
+                                                                 "S"
+                                                                      ? "bg-gray-300"
+                                                                      : ""
+                                                            } w-full text-lg font-semibold`}
+                                                       >
+                                                            S
+                                                       </button>
+                                                  </li>
+                                                  <li>
+                                                       <button
+                                                            onClick={() => {
+                                                                 dispatch(
+                                                                      updateItemSize(
+                                                                           {
+                                                                                id: product.id,
+                                                                                size: "M",
+                                                                           }
+                                                                      )
+                                                                 )
+                                                                 // setSelectedSize(
+                                                                 //      "M"
+                                                                 // )
+                                                            }}
+                                                            className={`${
+                                                                 // selectedSize ===
+                                                                 //      "M" &&
+                                                                 product.size ==
+                                                                 "M"
+                                                                      ? "bg-gray-300"
+                                                                      : ""
+                                                            } w-full text-lg font-semibold`}
+                                                       >
+                                                            M
+                                                       </button>
+                                                  </li>
+                                                  <li>
+                                                       <button
+                                                            onClick={() => {
+                                                                 dispatch(
+                                                                      updateItemSize(
+                                                                           {
+                                                                                id: product.id,
+                                                                                size: "L",
+                                                                           }
+                                                                      )
+                                                                 )
+                                                                 // setSelectedSize(
+                                                                 //      "L"
+                                                                 // )
+                                                            }}
+                                                            className={`${
+                                                                 product.size ==
+                                                                 "L"
+                                                                      ? "bg-gray-300"
+                                                                      : ""
+                                                            } w-full text-lg font-semibold`}
+                                                       >
+                                                            L
+                                                       </button>
+                                                  </li>
+                                             </ul>
+                                        </Box>
                                         <Box className="flex">
                                              <Button
                                                   className="w-[20px] h-[20px] content-center mr-3 text-white rounded-full bg-black"
                                                   variant="contained"
-                                                  onClick={() =>
-                                                       updateProductTang(
-                                                            product.id as number
-                                                       )
-                                                  }
+                                                  onClick={() => {
+                                                       if (
+                                                            product.quantity &&
+                                                            product.quantity <
+                                                                 (data[index]
+                                                                      ?.quantity as unknown as number)
+                                                       ) {
+                                                            updateProductTang(
+                                                                 product.id as number
+                                                            )
+                                                       } else {
+                                                            toast.warning(
+                                                                 "Không được vượt quá số lượng",
+                                                                 {
+                                                                      position:
+                                                                           "top-right",
+                                                                      autoClose: 1000,
+                                                                      hideProgressBar:
+                                                                           false,
+                                                                      closeOnClick:
+                                                                           true,
+                                                                      pauseOnHover:
+                                                                           true,
+                                                                      draggable:
+                                                                           true,
+                                                                      progress:
+                                                                           undefined,
+                                                                      theme: "light",
+                                                                 }
+                                                            )
+                                                       }
+                                                  }}
                                              >
                                                   +
                                              </Button>

@@ -21,6 +21,8 @@ interface Props {
      handleAgreeUpdate: () => void
      setPicture: React.Dispatch<React.SetStateAction<string>>
      picture: string
+     quantity: number
+     setQuantity: React.Dispatch<React.SetStateAction<number>>
 }
 
 const DialogList = ({
@@ -35,6 +37,8 @@ const DialogList = ({
      handleAgreeUpdate,
      setPicture,
      picture,
+     quantity,
+     setQuantity,
 }: // setPicture,
 Props) => {
      // const onChangePicture = e => {
@@ -89,6 +93,17 @@ Props) => {
                                    setListDescription(e.target.value)
                               }
                          ></TextField>
+                         <Box>
+                              <TextField
+                                   className="mb-[10px]"
+                                   variant="standard"
+                                   label="Số lượng sản phẩm"
+                                   value={quantity}
+                                   onChange={(e) =>
+                                        setQuantity(Number(e.target.value))
+                                   }
+                              ></TextField>
+                         </Box>
                          <br />
                          <Input
                               type="file"

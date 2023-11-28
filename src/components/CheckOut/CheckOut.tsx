@@ -301,6 +301,12 @@ const CheckOut = () => {
                                                             {product.quantity}
                                                        </Typography>
                                                   </Box>
+                                                  <Box className="flex">
+                                                       <Typography className="text-sm">
+                                                            Size:
+                                                            {product.size}
+                                                       </Typography>
+                                                  </Box>
                                              </Box>
                                         </Box>
                                    )

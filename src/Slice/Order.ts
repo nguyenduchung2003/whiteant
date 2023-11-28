@@ -78,6 +78,22 @@ export const slice = createSlice({
                     })
                }
           },
+          updateItemSize: (state, action) => {
+               const dataLocal: userType[] = JSON.parse(
+                    localStorage.getItem("userss") as string
+               )
+               const x = dataLocal.filter((user) => user.status == true)
+               const userNow = Object.assign({}, x)[0]
+
+               state.arrayOrderProduct.forEach((item) => {
+                    if (
+                         item.id == action.payload.id &&
+                         item.emailNow == userNow.userName
+                    ) {
+                         item.size = action.payload.size
+                    }
+               })
+          },
           completeMyOrder: (state, action) => {
                const dataLocal: userType[] = JSON.parse(
                     localStorage.getItem("userss") as string
@@ -93,7 +109,12 @@ export const slice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addItem, deleteItem, updateItem, completeMyOrder } =
-     slice.actions
+export const {
+     addItem,
+     deleteItem,
+     updateItem,
+     completeMyOrder,
+     updateItemSize,
+} = slice.actions
 
 export default slice.reducer
