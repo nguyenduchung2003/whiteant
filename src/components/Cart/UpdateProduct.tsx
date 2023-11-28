@@ -244,7 +244,7 @@ const UpdateProduct = () => {
                     theme: "light",
                })
                setTimeout(() => {
-                    navigator("/whitent/login")
+                    navigator("/whiteant/login")
                }, 3000)
           }
      }
