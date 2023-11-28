@@ -22,7 +22,7 @@ declare global {
           name: string
           price: string
           quantity: number
-          size?: string
+          size?: string[]
           emailNow?: string
      }
      interface arrayMyOrder {

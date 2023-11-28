@@ -1,5 +1,13 @@
-import { Box, Typography, Button, Input } from "@mui/material"
-import { useNavigate, useParams } from "react-router-dom"
+import {
+     Box,
+     Typography,
+     Button,
+     Input,
+     Checkbox,
+     FormGroup,
+     FormControlLabel,
+} from "@mui/material"
+import { useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hook"
 import HeadSideBar from "../SideBar/HeadSideBar"
 import { useState } from "react"
@@ -17,10 +25,18 @@ const DetailProduct = () => {
      const selectData = useAppSelector((state) => {
           return state.dataProduct.filter((item) => item.id == id)
      })
-     const navigate = useNavigate()
+
      const dispatch = useAppDispatch()
      const [quantity, setQuantity] = useState<number>(1)
-     const [selectedSize, setSelectedSize] = useState<string>("")
+     // const [selectedSize, setSelectedSize] = useState<string>("")
+     const [checkedValues, setCheckedValues] = useState<string[]>([])
+     const handleCheckboxChange = (value: string) => {
+          if (checkedValues.includes(value)) {
+               setCheckedValues(checkedValues.filter((v) => v !== value))
+          } else {
+               setCheckedValues([...checkedValues, value])
+          }
+     }
      const handlerAddItemOrder = async (
           id: number,
           path: string,
@@ -38,7 +54,7 @@ const DetailProduct = () => {
                name: name,
                price: price,
                quantity: quantity,
-               size: selectedSize,
+               size: checkedValues,
                emailNow: userNow?.userName,
           }
 
@@ -54,9 +70,6 @@ const DetailProduct = () => {
                progress: undefined,
                theme: "light",
           })
-          setTimeout(() => {
-               navigate("/whiteant/order")
-          }, 3000)
      }
      const [openMenu, setOpenMenu] = useState<boolean>(false)
      const [openCart, setOpenCart] = useState<boolean>(false)
@@ -67,6 +80,7 @@ const DetailProduct = () => {
           setOpenCart(true)
           setOpenMenu(false)
      }
+
      return (
           <>
                <HeadSideBar
@@ -134,9 +148,9 @@ const DetailProduct = () => {
                                              </Typography>
                                              <Box className="flex content-center">
                                                   <Typography className="h-[50px]">
-                                                       Chọn size
+                                                       Chọn size:
                                                   </Typography>
-                                                  <ul className="grid w-[50%] gap-6 md:grid-cols-3 ">
+                                                  {/* <ul className="grid w-[50%] gap-6 md:grid-cols-3 ">
                                                        <li>
                                                             <button
                                                                  onClick={() =>
@@ -154,6 +168,7 @@ const DetailProduct = () => {
                                                                  S
                                                             </button>
                                                        </li>
+
                                                        <li>
                                                             <button
                                                                  onClick={() =>
@@ -188,7 +203,51 @@ const DetailProduct = () => {
                                                                  L
                                                             </button>
                                                        </li>
-                                                  </ul>
+                                                  </ul> */}
+                                                  <FormGroup className="ml-10 ">
+                                                       <FormControlLabel
+                                                            control={
+                                                                 <Checkbox />
+                                                            }
+                                                            label="S"
+                                                            onChange={() =>
+                                                                 handleCheckboxChange(
+                                                                      "S"
+                                                                 )
+                                                            }
+                                                       />
+                                                       <FormControlLabel
+                                                            control={
+                                                                 <Checkbox />
+                                                            }
+                                                            label="M"
+                                                            onChange={() =>
+                                                                 handleCheckboxChange(
+                                                                      "M"
+                                                                 )
+                                                            }
+                                                       />
+                                                       <FormControlLabel
+                                                            control={
+                                                                 <Checkbox />
+                                                            }
+                                                            label="L"
+                                                            onChange={() =>
+                                                                 handleCheckboxChange(
+                                                                      "L"
+                                                                 )
+                                                            }
+                                                       />
+                                                       {/* <div>
+                                                            <strong>
+                                                                 Giá trị đã
+                                                                 chọn:
+                                                            </strong>{" "}
+                                                            {checkedValues.join(
+                                                                 ", "
+                                                            )}
+                                                       </div> */}
+                                                  </FormGroup>
                                              </Box>
                                              <Box className="flex content-center">
                                                   <Box className="flex justify-center">

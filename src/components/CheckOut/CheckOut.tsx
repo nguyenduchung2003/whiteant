@@ -73,7 +73,7 @@ const CheckOut = () => {
                !nameDistrict ||
                !nameWard
           ) {
-               toast.error("Vui long nhap day du", {
+               toast.error("Vui lòng nhập đầy đủ", {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -84,7 +84,7 @@ const CheckOut = () => {
                     theme: "light",
                })
           } else if (selectOrder.length <= 0) {
-               toast.error("Chua co san pham nao trong hoa don", {
+               toast.error("Chưa có sản phẩm nào trong hóa đơn", {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -109,7 +109,7 @@ const CheckOut = () => {
                     totalAmount: totalAmount,
                     emailNow: user.userName,
                }
-               toast.success("Dat hang thanh cong", {
+               await toast.success("Đặt hàng thành công", {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -304,7 +304,9 @@ const CheckOut = () => {
                                                   <Box className="flex">
                                                        <Typography className="text-sm">
                                                             Size:
-                                                            {product.size}
+                                                            {product.size?.join(
+                                                                 ","
+                                                            )}
                                                        </Typography>
                                                   </Box>
                                              </Box>

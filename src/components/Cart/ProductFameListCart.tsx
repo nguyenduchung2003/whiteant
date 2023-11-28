@@ -1,8 +1,17 @@
-import { Box, Button, Typography, Input, IconButton } from "@mui/material"
+import {
+     Box,
+     Button,
+     Typography,
+     Input,
+     IconButton,
+     FormControlLabel,
+     Checkbox,
+     FormGroup,
+} from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 // import AddIcon from "@mui/icons-material/Add"
 // import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule"
-// import { useState } from "react"
+import { useState } from "react"
 import { useAppSelector, useAppDispatch } from "../../hook"
 import { deleteItem, updateItem, updateItemSize } from "../../Slice/Order"
 import { ToastContainer, toast } from "react-toastify"
@@ -47,6 +56,20 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
      )
      console.log(data)
      console.log(arrayDataProduct)
+     const [checkedValues, setCheckedValues] = useState<string[]>([])
+     const handleCheckboxChange = (value: string, id: number) => {
+          if (checkedValues.includes(value)) {
+               setCheckedValues(checkedValues.filter((v) => v !== value))
+          } else {
+               setCheckedValues([...checkedValues, value])
+          }
+          dispatch(
+               updateItemSize({
+                    id: id,
+                    size: checkedValues,
+               })
+          )
+     }
      return (
           <>
                <ToastContainer />
@@ -79,7 +102,82 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
                                                   Chọn size
                                              </Typography>
 
-                                             <ul className="grid w-[50%] gap-6 md:grid-cols-3 ">
+                                             <FormGroup>
+                                                  <FormControlLabel
+                                                       control={
+                                                            <Checkbox
+                                                                 checked={
+                                                                      product.size?.some(
+                                                                           (
+                                                                                value
+                                                                           ) =>
+                                                                                value ==
+                                                                                "S"
+                                                                      )
+                                                                           ? true
+                                                                           : false
+                                                                 }
+                                                            />
+                                                       }
+                                                       label="S"
+                                                       onChange={() =>
+                                                            handleCheckboxChange(
+                                                                 "S",
+                                                                 product.id as number
+                                                            )
+                                                       }
+                                                  />
+                                                  <FormControlLabel
+                                                       control={
+                                                            <Checkbox
+                                                                 checked={
+                                                                      product.size?.some(
+                                                                           (
+                                                                                value
+                                                                           ) =>
+                                                                                value ==
+                                                                                "M"
+                                                                      )
+                                                                           ? true
+                                                                           : false
+                                                                 }
+                                                            />
+                                                       }
+                                                       label="M"
+                                                       onChange={() =>
+                                                            handleCheckboxChange(
+                                                                 "M",
+                                                                 product.id as number
+                                                            )
+                                                       }
+                                                  />
+                                                  <FormControlLabel
+                                                       control={
+                                                            <Checkbox
+                                                                 checked={
+                                                                      product.size?.some(
+                                                                           (
+                                                                                value
+                                                                           ) =>
+                                                                                value ==
+                                                                                "L"
+                                                                      )
+                                                                           ? true
+                                                                           : false
+                                                                 }
+                                                            />
+                                                       }
+                                                       label="L"
+                                                       onChange={() =>
+                                                            handleCheckboxChange(
+                                                                 "L",
+                                                                 product.id as number
+                                                            )
+                                                       }
+                                                  />
+                                             </FormGroup>
+
+                                             {/* <ul className="grid w-[50%] gap-6 md:grid-cols-3 ">
                                                   <li>
                                                        <button
                                                             onClick={() => {
@@ -157,7 +255,7 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
                                                             L
                                                        </button>
                                                   </li>
-                                             </ul>
+                                             </ul> */}
                                         </Box>
                                         <Box className="flex">
                                              <Button
