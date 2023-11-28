@@ -5,6 +5,7 @@ import Login from "../components/Login"
 import Order from "../components/Cart/UpdateProduct"
 import CheckOut from "../components/CheckOut"
 import Bill from "../components/Bill"
+import DetailProduct from "../components/DetailProduct"
 const router = createBrowserRouter([
      {
           path: "/whiteant/",
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
      {
           path: "/whiteant/order",
           element: <Order />,
+     },
+     {
+          path: "/whiteant/order/:id",
+          element: <DetailProduct />,
      },
      {
           path: "/whiteant/checkout",

@@ -4,6 +4,10 @@ declare global {
           pathImg: string
           name: string
           price: string
+          size: string[]
+          quantity: number
+          material: string
+          describe: string
      }
      interface userType {
           userName: string

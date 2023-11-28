@@ -16,7 +16,7 @@ import {
 import DialogList from "./DialogList"
 import Menu from "../Menu"
 import { useAppSelector, useAppDispatch } from "../../hook"
-import { addItem } from "../../Slice/Order"
+// import { addItem } from "../../Slice/Order"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Cart from "./Cart"
@@ -175,27 +175,28 @@ const UpdateProduct = () => {
      }
      const navigator = useNavigate()
      const handlerAddItemOrder = async (
-          id: number,
-          path: string,
-          name: string,
-          price: string
+          id: number
+          // path: string,
+          // name: string,
+          // price: string
      ) => {
           const dataLocal: userType[] = JSON.parse(
                localStorage.getItem("userss") as string
           )
           const x = dataLocal.filter((user) => user.status == true)
           const userNow = Object.assign({}, x)[0]
-          const newItem: arrayOrderProduct = {
-               id: id,
-               pathImg: path,
-               name: name,
-               price: price,
-               quantity: 1,
-               emailNow: userNow?.userName,
-          }
+          // const newItem: arrayOrderProduct = {
+          //      id: id,
+          //      pathImg: path,
+          //      name: name,
+          //      price: price,
+          //      quantity: 1,
+          //      emailNow: userNow?.userName,
+          // }
 
           if (userNow) {
-               await dispatch(addItem(newItem))
+               // await dispatch(addItem(newItem))
+               navigator(`/whiteAnt/order/${id}`)
                toast.success("Thêm vào giỏ hàng thành công", {
                     position: "top-right",
                     autoClose: 3000,
@@ -338,10 +339,10 @@ const UpdateProduct = () => {
                                              <Typography
                                                   onClick={() =>
                                                        handlerAddItemOrder(
-                                                            product.id as number,
-                                                            product.pathImg,
-                                                            product.name,
-                                                            product.price
+                                                            product.id as number
+                                                            // product.pathImg,
+                                                            // product.name,
+                                                            // product.price
                                                        )
                                                   }
                                                   className="absolute invisible  top-[261px] bg-black w-[348px] h-[32px] leading-8 text-white text-center  group-hover/item:visible"
