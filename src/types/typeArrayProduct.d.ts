@@ -1,5 +1,4 @@
 declare global {
-     
      interface arrayNewProduct {
           id?: number
           pathImg: string
@@ -23,6 +22,7 @@ declare global {
           name: string
           price: string
           quantity: number
+          size?: string
           emailNow?: string
      }
      interface arrayMyOrder {
