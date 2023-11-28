@@ -4,13 +4,17 @@ import List from "@mui/material/List"
 
 import ProductCart from "../Cart/ProductCart"
 
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom"
-
+import { useAppSelector } from "../../hook"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 const Cart = ({
      setOpenCart,
 }: {
      setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
+     const selectData = useAppSelector((state) => state.order.arrayOrderProduct)
      //   const [open, setOpen] = useState<boolean>(false);
      const navigate = useNavigate()
 
@@ -27,6 +31,7 @@ const Cart = ({
      //   }
      return (
           <>
+               <ToastContainer />
                <Box className="w-full h-full  fixed">
                     <List
                          sx={{
@@ -74,7 +79,23 @@ const Cart = ({
                                    variant="contained"
                                    className=" bg-black w-[90%]"
                                    onClick={() => {
-                                        navigate("/whiteant/checkout")
+                                        selectData.some(
+                                             (item) => item.size?.length == 0
+                                        )
+                                             ? toast.warning(
+                                                    "Bạn cần phải chọn size",
+                                                    {
+                                                         position: "top-right",
+                                                         autoClose: 3000,
+                                                         hideProgressBar: false,
+                                                         closeOnClick: true,
+                                                         pauseOnHover: true,
+                                                         draggable: true,
+                                                         progress: undefined,
+                                                         theme: "light",
+                                                    }
+                                               )
+                                             : navigate("/whiteant/checkout")
                                    }}
                               >
                                    Thanh toán

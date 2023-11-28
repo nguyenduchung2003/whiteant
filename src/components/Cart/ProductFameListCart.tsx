@@ -74,6 +74,7 @@ const ProductFameListCart = ({ arrayDataProduct }: Props) => {
                     }
                }
           })
+          console.log(checkedValues)
      }
      useEffect(() => {
           Object.keys(checkedValues).forEach((id) => {
