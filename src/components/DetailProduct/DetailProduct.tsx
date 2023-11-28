@@ -6,8 +6,8 @@ import { useState } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Footer from "../Footer"
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import CollapsibleSection from './CollapsibleSection'
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
+import CollapsibleSection from "./CollapsibleSection"
 const DetailProduct = () => {
      const { id } = useParams()
      const selectData = useAppSelector((state) => {
@@ -23,13 +23,26 @@ const DetailProduct = () => {
                          return (
                               <Box className="flex" key={index}>
                                    <Box className="flex">
-                                        <img src={item.pathImg} alt="" className="" />
+                                        <img
+                                             src={item.pathImg}
+                                             alt=""
+                                             className=""
+                                        />
                                    </Box>
                                    <Box className=" flex flex-col gap-5 ml-20">
                                         <Box className="flex flex-col gap-5">
-                                             <Typography variant="h4" className="w-full" ><strong>{item.name}</strong></Typography>
-                                             <Typography className="w-full" >Mã SP: 123456</Typography>
-                                             <Typography className="w-full" >Tình trạng: Còn hàng</Typography>
+                                             <Typography
+                                                  variant="h4"
+                                                  className="w-full"
+                                             >
+                                                  <strong>{item.name}</strong>
+                                             </Typography>
+                                             <Typography className="w-full">
+                                                  Mã SP: 123456
+                                             </Typography>
+                                             <Typography className="w-full">
+                                                  Tình trạng: Còn hàng
+                                             </Typography>
                                              <Typography variant="h5">
                                                   <strong> {item.price}</strong>
                                              </Typography>
@@ -41,9 +54,13 @@ const DetailProduct = () => {
                                                             onClick={() => {
                                                                  if (
                                                                       item.quantity &&
-                                                                      quantity < item.quantity
+                                                                      quantity <
+                                                                           item.quantity
                                                                  ) {
-                                                                      setQuantity(quantity + 1)
+                                                                      setQuantity(
+                                                                           quantity +
+                                                                                1
+                                                                      )
                                                                  } else {
                                                                       toast.warning(
                                                                            "Không được vượt quá số lượng",
@@ -82,7 +99,10 @@ const DetailProduct = () => {
                                                             // }
                                                             variant="contained"
                                                             onClick={() => {
-                                                                 if (quantity == 0) {
+                                                                 if (
+                                                                      quantity ==
+                                                                      0
+                                                                 ) {
                                                                       toast.warning(
                                                                            "Số lượng sản phẩm phải lớn hơn 0",
                                                                            {
@@ -103,28 +123,37 @@ const DetailProduct = () => {
                                                                            }
                                                                       )
                                                                  } else {
-                                                                      setQuantity(quantity - 1)
+                                                                      setQuantity(
+                                                                           quantity -
+                                                                                1
+                                                                      )
                                                                  }
                                                             }}
                                                        >
                                                             -
                                                        </Button>
                                                   </Box>
-                                                  <Button className="ml-5 bg-black text-white w-[20%] rounded-full"><AddShoppingCartIcon></AddShoppingCartIcon>Thêm vào giỏ hàng</Button>
+                                                  <Button className="ml-5 bg-black text-white w-[20%] rounded-full">
+                                                       <AddShoppingCartIcon></AddShoppingCartIcon>
+                                                       Thêm vào giỏ hàng
+                                                  </Button>
                                              </Box>
                                         </Box>
 
-
                                         <Box className="flex flex-col gap-1 mt-10">
-                                             <CollapsibleSection title="Mô tả chi tiết" content={item.describe} />
-                                             <CollapsibleSection title="Hướng dẫn bảo quản" content={item.describe} />
+                                             <CollapsibleSection
+                                                  title="Mô tả chi tiết"
+                                                  content={item.describe}
+                                             />
+                                             <CollapsibleSection
+                                                  title="Hướng dẫn bảo quản"
+                                                  content={item.describe}
+                                             />
                                         </Box>
-
                                    </Box>
                               </Box>
                          )
                     })}
-
                </Box>
                <Footer />
           </>
