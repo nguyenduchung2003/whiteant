@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Collapse, Card, Typography } from '@mui/material';
-import { CardBody } from 'reactstrap';
+import { Button, Collapse, Typography } from '@mui/material';
 
 interface CollapsibleSectionProps {
   title?: string;
@@ -21,11 +20,7 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({ title, content 
         {title}
       </Button>
       <Collapse in={visible}>
-        <Card className="mt-3 flex w-[90%]">
-          <CardBody className="grid grid-cols-1 text-center text-justify">
-            <Typography>{content}</Typography>
-          </CardBody>
-        </Card>
+            <Typography className="flex w-[90%]">{content}</Typography>
       </Collapse>
     </>
   );
