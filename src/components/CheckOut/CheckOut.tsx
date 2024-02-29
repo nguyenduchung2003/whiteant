@@ -21,15 +21,15 @@ const CheckOut = () => {
      const dataLocal: userType[] = JSON.parse(
           localStorage.getItem("userss") as string
      )
-     const x = dataLocal.filter((user) => user.status == true)
+     const x = dataLocal?.filter((user) => user.status == true)
      const userNow = Object.assign({}, x)[0]
 
      const selectOrder = useAppSelector((state) => {
           const dataFilters = state.order.arrayOrderProduct
 
           return userNow
-               ? dataFilters.filter(
-                      (item) => item.emailNow === userNow.userName
+               ? dataFilters?.filter(
+                      (item) => item.emailNow === userNow?.userName
                  )
                : []
      })
@@ -39,7 +39,7 @@ const CheckOut = () => {
      const [nameWard, setNameWard] = useState<string>("")
      const navigate = useNavigate()
      const [name, setName] = useState<string>("")
-     const [email, setEmail] = useState<string>(userNow.userName)
+     const [email, setEmail] = useState<string>(userNow?.userName)
      const [numberPhone, setNumberPhone] = useState<string>("")
      const [address, setAddress] = useState<string>("")
      const [valueShip, setValueShip] = useState("ghtk")
@@ -60,7 +60,7 @@ const CheckOut = () => {
      )
 
      const CompleteOrder = async () => {
-          const x = userLocal.filter((user) => user.status == true)
+          const x = userLocal?.filter((user) => user.status == true)
           const user = Object.assign({}, x)[0]
           if (
                !name ||
@@ -75,7 +75,7 @@ const CheckOut = () => {
           ) {
                toast.error("Vui lòng nhập đầy đủ", {
                     position: "top-right",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -86,7 +86,7 @@ const CheckOut = () => {
           } else if (selectOrder.length <= 0) {
                toast.error("Chưa có sản phẩm nào trong hóa đơn", {
                     position: "top-right",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -107,11 +107,11 @@ const CheckOut = () => {
                     nameWard: nameWard,
                     arrayOder: selectOrder,
                     totalAmount: totalAmount,
-                    emailNow: user.userName,
+                    emailNow: user?.userName,
                }
-               await toast.success("Đặt hàng thành công", {
+               toast.success("Đặt hàng thành công", {
                     position: "top-right",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -119,7 +119,7 @@ const CheckOut = () => {
                     progress: undefined,
                     theme: "light",
                })
-               await dispatch(completeMyOrder(newOrder))
+               dispatch(completeMyOrder(newOrder))
                navigate("/whiteant/bill")
                console.log(newOrder)
           }
@@ -158,7 +158,7 @@ const CheckOut = () => {
                                         Thông tin giao hàng
                                    </Typography>
                                    <Box className="flex">
-                                        {userLocal.some(
+                                        {userLocal?.some(
                                              (user) => user.status == true
                                         ) ? (
                                              ""

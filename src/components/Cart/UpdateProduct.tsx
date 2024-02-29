@@ -14,12 +14,12 @@ import {
      useState,
 } from "react"
 import DialogList from "./DialogList"
-import Menu from "../Menu"
+
 import { useAppSelector, useAppDispatch } from "../../hook"
 // import { addItem } from "../../Slice/Order"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import Cart from "./Cart"
+
 import SearchIcon from "@mui/icons-material/Search"
 import DeleteIcon from "@mui/icons-material/Delete"
 import EditIcon from "@mui/icons-material/Edit"
@@ -194,10 +194,7 @@ const UpdateProduct = () => {
                setOpen(false)
           }
      }
-     const [openMenu, setOpenMenu] = useState<boolean>(false)
-     const ClickOpenMenu = () => {
-          setOpenMenu(true)
-     }
+
      const navigator = useNavigate()
      const handlerAddItemOrder = async (
           id: number
@@ -208,7 +205,7 @@ const UpdateProduct = () => {
           const dataLocal: userType[] = JSON.parse(
                localStorage.getItem("userss") as string
           )
-          const x = dataLocal.filter((user) => user.status == true)
+          const x = dataLocal?.filter((user) => user.status == true)
           const userNow = Object.assign({}, x)[0]
           // const newItem: arrayOrderProduct = {
           //      id: id,
@@ -224,7 +221,7 @@ const UpdateProduct = () => {
                navigator(`/whiteant/order/${id}`)
                toast.success("Thêm vào giỏ hàng thành công", {
                     position: "top-right",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -235,7 +232,7 @@ const UpdateProduct = () => {
           } else {
                toast.warning("Bạn cần phải đăng nhập trước", {
                     position: "top-right",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -249,36 +246,14 @@ const UpdateProduct = () => {
           }
      }
 
-     const [openCart, setOpenCart] = useState<boolean>(false) // New state for cart visibility
-
-     const ClickOpenCart = () => {
-          setOpenCart(true)
-          setOpenMenu(false)
-     }
      const dataLocal = JSON.parse(localStorage.getItem("userss") as string)
 
      return (
           <>
                <Box className="relative">
                     <ToastContainer />
-                    <HeadSideBar
-                         ClickOpenMenu={ClickOpenMenu}
-                         ClickOpenCart={ClickOpenCart}
-                    />
-                    {openMenu ? (
-                         <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                              <Menu setOpenMenu={setOpenMenu} />
-                         </Box>
-                    ) : (
-                         ""
-                    )}
-                    {openCart ? (
-                         <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                              <Cart setOpenCart={setOpenCart} />
-                         </Box>
-                    ) : (
-                         ""
-                    )}
+                    <HeadSideBar />
+
                     <hr />
                     <img
                          src={`${allProduct}`}

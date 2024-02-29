@@ -10,6 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from "react-toastify"
 const Menu = ({
      setOpenMenu,
 }: {
@@ -40,6 +41,7 @@ const Menu = ({
      )
      return (
           <>
+               <ToastContainer />
                <Box className=" w-full h-full  fixed ">
                     <List
                          sx={{
@@ -160,7 +162,47 @@ const Menu = ({
                               <ListItemText
                                    primary="BILL"
                                    onClick={() => {
-                                        navigate("/whiteant/bill")
+                                        const dataLocal: userType[] =
+                                             JSON.parse(
+                                                  localStorage.getItem(
+                                                       "userss"
+                                                  ) as string
+                                             )
+                                        const x = dataLocal?.filter(
+                                             (user) => user.status == true
+                                        )
+                                        const userNow = Object.assign({}, x)[0]
+
+                                        if (userNow) {
+                                             navigate("/whiteant/bill")
+                                             toast.success(
+                                                  "Thêm vào giỏ hàng thành công",
+                                                  {
+                                                       position: "top-right",
+                                                       autoClose: 1000,
+                                                       hideProgressBar: false,
+                                                       closeOnClick: true,
+                                                       pauseOnHover: true,
+                                                       draggable: true,
+                                                       progress: undefined,
+                                                       theme: "light",
+                                                  }
+                                             )
+                                        } else {
+                                             toast.warning(
+                                                  "Bạn cần phải đăng nhập trước",
+                                                  {
+                                                       position: "top-right",
+                                                       autoClose: 1000,
+                                                       hideProgressBar: false,
+                                                       closeOnClick: true,
+                                                       pauseOnHover: true,
+                                                       draggable: true,
+                                                       progress: undefined,
+                                                       theme: "light",
+                                                  }
+                                             )
+                                        }
                                    }}
                               />
                          </ListItemButton>

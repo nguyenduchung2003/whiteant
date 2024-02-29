@@ -26,8 +26,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import HeadSideBar from "../SideBar/HeadSideBar"
-import Menu from "../Menu"
-import Cart from "../Cart/Cart"
+
 // import { userType } from "../types/User"
 
 const Register = () => {
@@ -50,43 +49,11 @@ const Register = () => {
           password: "",
           passwordConfirm: "",
      }
-     // useEffect(() => {
-     //      dispatch(requestToken())
-     // }, [dispatch])
-     // const actionTokenNew = useSelector(
-     //      (state: RootState) => state.accountSlice.request_token as string
-     // )
-     const [openMenu, setOpenMenu] = useState<boolean>(false)
-     const ClickOpenMenu = () => {
-          setOpenMenu(true)
-     }
 
-     const [openCart, setOpenCart] = useState<boolean>(false) // New state for cart visibility
-
-     const ClickOpenCart = () => {
-          setOpenCart(true)
-          setOpenMenu(false)
-     }
      return (
           <>
-               <HeadSideBar
-                    ClickOpenMenu={ClickOpenMenu}
-                    ClickOpenCart={ClickOpenCart}
-               />
-               {openMenu ? (
-                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                         <Menu setOpenMenu={setOpenMenu} />
-                    </Box>
-               ) : (
-                    ""
-               )}
-               {openCart ? (
-                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                         <Cart setOpenCart={setOpenCart} />
-                    </Box>
-               ) : (
-                    ""
-               )}
+               <HeadSideBar />
+
                <hr />
                <Box className="flex justify-center items-center mt-[120px] ">
                     <Formik

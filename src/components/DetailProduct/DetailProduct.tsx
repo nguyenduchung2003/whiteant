@@ -17,8 +17,7 @@ import Footer from "../Footer"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
 import CollapsibleSection from "./CollapsibleSection"
 import { addItem } from "../../Slice/Order"
-import Menu from "../Menu"
-import Cart from "../Cart/Cart"
+
 const DetailProduct = () => {
      const { id } = useParams()
 
@@ -62,7 +61,7 @@ const DetailProduct = () => {
 
           toast.success("Thêm vào giỏ hàng thành công", {
                position: "top-right",
-               autoClose: 3000,
+               autoClose: 1000,
                hideProgressBar: false,
                closeOnClick: true,
                pauseOnHover: true,
@@ -71,36 +70,11 @@ const DetailProduct = () => {
                theme: "light",
           })
      }
-     const [openMenu, setOpenMenu] = useState<boolean>(false)
-     const [openCart, setOpenCart] = useState<boolean>(false)
-     const ClickOpenMenu = () => {
-          setOpenMenu(true)
-     }
-     const ClickOpenCart = () => {
-          setOpenCart(true)
-          setOpenMenu(false)
-     }
 
      return (
           <>
-               <HeadSideBar
-                    ClickOpenMenu={ClickOpenMenu}
-                    ClickOpenCart={ClickOpenCart}
-               />
-               {openMenu ? (
-                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                         <Menu setOpenMenu={setOpenMenu} />
-                    </Box>
-               ) : (
-                    ""
-               )}
-               {openCart ? (
-                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                         <Cart setOpenCart={setOpenCart} />
-                    </Box>
-               ) : (
-                    ""
-               )}
+               <HeadSideBar />
+
                <ToastContainer />
                <Box>
                     {selectData.map((item, index) => {

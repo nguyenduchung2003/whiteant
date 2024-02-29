@@ -14,7 +14,7 @@ const Bill = () => {
      const dataLocal: userType[] = JSON.parse(
           localStorage.getItem("userss") as string
      )
-     const x = dataLocal.filter((user) => user.status == true)
+     const x = dataLocal?.filter((user) => user.status == true)
      const userNow = Object.assign({}, x)[0]
      const navigate = useNavigate()
      return (
@@ -55,7 +55,7 @@ const Bill = () => {
                          </TableHead>
                          <TableBody>
                               {selectOrder
-                                   .filter((item) => {
+                                   ?.filter((item) => {
                                         console.log(item.emailNow)
                                         console.log(userNow.userName)
                                         return item.emailNow == userNow.userName

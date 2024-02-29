@@ -28,9 +28,9 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import HeadSideBar from "../SideBar/HeadSideBar"
-import Menu from "../Menu"
+
 import FooterContent from "../Footer/FooterContent"
-import Cart from "../Cart/Cart"
+
 // import { useSelector } from "react-redux"
 // import { RootState } from "../Store/store"
 import { ToastContainer, toast } from "react-toastify"
@@ -90,15 +90,7 @@ const Login = () => {
      // const access_token = useSelector(
      //      (state: RootState) => state.accountSlice.access_token as string
      // )
-     const [openMenu, setOpenMenu] = useState<boolean>(false)
-     const [openCart, setOpenCart] = useState<boolean>(false) // New state for cart visibility
-     const ClickOpenMenu = () => {
-          setOpenMenu(true)
-     }
-     const ClickOpenCart = () => {
-          setOpenCart(true)
-          setOpenMenu(false)
-     }
+
      useEffect(() => {
           const admin = {
                userName: "admin@gmail.com",
@@ -123,24 +115,8 @@ const Login = () => {
      }, [])
      return (
           <>
-               <HeadSideBar
-                    ClickOpenMenu={ClickOpenMenu}
-                    ClickOpenCart={ClickOpenCart}
-               />
-               {openMenu ? (
-                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                         <Menu setOpenMenu={setOpenMenu} />
-                    </Box>
-               ) : (
-                    ""
-               )}
-               {openCart ? (
-                    <Box className="w-full h-[100vh] bg-[rgba(0,0,0,.75)] fixed top-[0px] z-[30]">
-                         <Cart setOpenCart={setOpenCart} />
-                    </Box>
-               ) : (
-                    ""
-               )}
+               <HeadSideBar />
+
                <hr />
                <Box className=" flex justify-center items-center mt-[150px]">
                     <ToastContainer />
@@ -184,7 +160,7 @@ const Login = () => {
                                              "Tài khoản hoặc mật khẩu không chính xác",
                                              {
                                                   position: "top-right",
-                                                  autoClose: 3000,
+                                                  autoClose: 1000,
                                                   hideProgressBar: false,
                                                   closeOnClick: true,
                                                   pauseOnHover: true,
@@ -203,7 +179,7 @@ const Login = () => {
                                         "Tài khoản hoặc mật khẩu không chính xác",
                                         {
                                              position: "top-right",
-                                             autoClose: 3000,
+                                             autoClose: 1000,
                                              hideProgressBar: false,
                                              closeOnClick: true,
                                              pauseOnHover: true,
@@ -370,8 +346,6 @@ const Login = () => {
                     </Formik>
                </Box>
                <FooterContent />
-               {/* Display Cart when openCart is true */}
-               {openCart && <Cart setOpenCart={setOpenCart} />}
           </>
      )
 }

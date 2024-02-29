@@ -21,7 +21,7 @@ const ProductCart = () => {
           localStorage.getItem("userss") as string
      )
      // const [checkedValues, setCheckedValues] = useState<string[]>([])
-     const x = dataLocal.filter((user) => user.status == true)
+     const x = dataLocal?.filter((user) => user.status == true)
      const userNow = Object.assign({}, x)[0]
      return (
           <>
